@@ -36,7 +36,10 @@ assert(!main.includes('card.target = "_blank"'), "Product cards should navigate 
 assert(!main.includes('product-carousel-control'), "Visible carousel arrow controls should be removed");
 assert(main.includes('id="productPrevArea"') && main.includes('id="productNextArea"'), "Clickable carousel side regions are missing");
 assert(main.includes('returnUrl.searchParams.set("product", product.id)'), "Product return-state link is missing");
+assert(main.indexOf('productUrl.searchParams.set("return", returnUrl.href)') < main.indexOf('card.addEventListener("click"'), "Product return-state must be embedded before click navigation");
 assert(main.includes('restoreProductFromLocation'), "Carousel state restoration is missing");
+assert(main.includes('function isProductGalleryReturn()'), "Product return must bypass the landing screen");
+assert(main.includes('if (isProductGalleryReturn()) {') && main.includes('document.body.classList.remove("landing-locked")'), "Landing screen is not dismissed for product returns");
 
 const productPaths = [...main.matchAll(/path:\s*"([^"]+)"/g)].map((match) => match[1]);
 assert(productPaths.length === 15, `Expected 15 product paths, found ${productPaths.length}`);
@@ -44,10 +47,30 @@ assert(productPaths.every((path) => path.startsWith("./产品与案例/产品说
 
 const productDocFiles = await collectHtml(productDocsDir);
 assert(productDocFiles.length === 15, `Expected 15 product documents, found ${productDocFiles.length}`);
+const productIdsByFile = new Map([
+  ["IP-OS操盘工作台-产品花皮书.html", "ipos"],
+  ["见舟工作台花皮书.html", "jianzhou"],
+  ["金牌销售大师-产品花皮书.html", "sales"],
+  ["启程AI自动化发票报销系统说明书.html", "expense"],
+  ["AI智联房产_花皮书界面版_应用说明书.html", "realestate"],
+  ["家居智能体-使用说明书.html", "home"],
+  ["织序-AI穿搭顾问-安卓端使用说明书.html", "style"],
+  ["旅图种草引擎_旅游内容全流程与效果说明.html", "travel"],
+  ["1688图文二创工作台-快速操作花皮书.html", "1688"],
+  ["飞书爆款对标库插件使用手册.html", "feishu"],
+  ["口播数字人工作台-产品说明花皮书.html", "avatar"],
+  ["见舟画布录制Beta_快速操作手册.html", "recorder"],
+  ["PSD智能工作台-使用介绍与功能说明.html", "psd"],
+  ["北辰导读-产品花皮书.html", "reader"],
+  ["重生修仙_AI漫画生成全流程与效果说明.html", "comic"],
+]);
 for (const productDocPath of productDocFiles) {
   const productDoc = await readFile(productDocPath, "utf8");
+  const fileName = productDocPath.split(/[\\/]/).pop();
+  const productId = productIdsByFile.get(fileName);
+  assert(productId, `Product ID mapping is missing for ${productDocPath}`);
   assert(productDoc.includes('class="team-return-button"'), `Team return button is missing in ${productDocPath}`);
-  assert(productDoc.includes('href="../../AI企业落地团队介绍.html#products"'), `Team return path is incorrect in ${productDocPath}`);
+  assert(productDoc.includes(`href="../../AI企业落地团队介绍.html?product=${productId}#product-gallery"`), `Exact team return path is incorrect in ${productDocPath}`);
   assert(productDoc.includes('id="team-return-script"'), `Team return-state script is missing in ${productDocPath}`);
 }
 
