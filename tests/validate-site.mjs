@@ -39,7 +39,23 @@ assert(main.includes('returnUrl.searchParams.set("product", product.id)'), "Prod
 assert(main.indexOf('productUrl.searchParams.set("return", returnUrl.href)') < main.indexOf('card.addEventListener("click"'), "Product return-state must be embedded before click navigation");
 assert(main.includes('restoreProductFromLocation'), "Carousel state restoration is missing");
 assert(main.includes('function isProductGalleryReturn()'), "Product return must bypass the landing screen");
-assert(main.includes('if (isProductGalleryReturn()) {') && main.includes('document.body.classList.remove("landing-locked")'), "Landing screen is not dismissed for product returns");
+assert(main.includes('if (isProductGalleryReturn() || isServicePricingReturn()) {') && main.includes('document.body.classList.remove("landing-locked")'), "Landing screen is not dismissed for inner-page returns");
+assert(main.includes('id="services"'), "Services and pricing section is missing");
+assert(main.includes('href="./产品与案例/服务与报价.html"'), "Services and pricing detail link is missing");
+assert(main.includes('function isServicePricingReturn()'), "Services return must bypass the landing screen");
+assert(/<div class="section-index"><span>01<\/span><\/div>\s*<h2 id="ability-title">/.test(main), "Team ability subsection must be numbered 01");
+assert(/<div class="section-index"><span>02<\/span><\/div>\s*<h2 id="division-title">/.test(main), "Team division subsection must be numbered 02");
+assert(/<div class="section-index"><span>03<\/span><\/div>\s*<h2 id="members-title">/.test(main), "Team members subsection must be numbered 03");
+assert(main.includes('<h3><span>先用小成本验证价值</span><span>再决定是否放大</span></h3>'), "Services headline must stay on the approved two lines");
+
+const servicePricingPath = join(root, "产品与案例", "服务与报价.html");
+const servicePricing = await readFile(servicePricingPath, "utf8");
+assert(servicePricing.includes('class="team-return"'), "Team return button is missing from the services and pricing page");
+assert(servicePricing.includes('href="../AI企业落地团队介绍.html?from=services#services"'), "Services and pricing return path is incorrect");
+assert(servicePricing.includes("AI企业落地 · 服务与报价"), "Services and pricing title was not updated to AI企业落地");
+assert(!servicePricing.includes("AI 数字化转型") && !servicePricing.includes("AI数字化转型"), "Legacy AI数字化转型 copy remains in the services page");
+assert(servicePricing.includes("公开体验课") && servicePricing.includes("免费 / 99 元"), "New public experience class pricing is missing");
+assert(main.includes("<strong>公开体验课</strong>") && main.includes("免费 / 99元"), "Main pricing summary is missing the public experience class");
 
 const productPaths = [...main.matchAll(/path:\s*"([^"]+)"/g)].map((match) => match[1]);
 assert(productPaths.length === 15, `Expected 15 product paths, found ${productPaths.length}`);
