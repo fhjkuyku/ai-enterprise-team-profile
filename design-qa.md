@@ -1,37 +1,43 @@
-# 设计与浏览器验收
+# Design QA Report
 
-## 验收环境
+## Result
 
-- 浏览器：Google Chrome（本机稳定版）
-- 桌面视口：1440 × 1000
-- 移动端视口：390 × 844
-- 页面：团队介绍首页、产品与案例介绍页
-- 本地全量证据目录：`E:\CodexQA\ai-enterprise-team-profile\20260814-224054`
-- 优化头像证据目录：`E:\CodexQA\ai-enterprise-team-profile\20260815-optimized`
-- 生产文件证据目录：`E:\CodexQA\ai-enterprise-team-profile\20260815-github-pages`
+**Passed** — no P0, P1, or P2 visual or interaction findings remain.
 
-## 自动化检查
+## Visual truth
 
-- 两个视口均无横向溢出
-- 两个页面均无控制台错误、页面脚本异常、请求失败或 HTTP 4xx/5xx
-- 所有图片均完成加载且尺寸有效
-- 团队介绍页首次进入与刷新位置为页面顶部
-- 产品与案例页共生成 15 个产品说明按钮
-- 产品详情浮层可打开，产品说明 iframe 路径有效，返回按钮可关闭
-- 产品页返回团队介绍的链接有效
+- Reference: `landing-ai-enterprise-team.png`
+- Reference dimensions: 1586 × 992 px
+- Implementation screenshot: `qa-landing-initial.png`
+- Browser QA viewport: 1586 × 877 CSS px, DPR 1
+- Fit behavior: the 1586 × 992 reference is proportionally contained and centered on the warm-white fullscreen gate.
+- Full comparison: `qa-reference-vs-implementation.png`
+- Focused CTA comparison: `qa-buttons-comparison.png`
 
-## 视觉检查
+## Fidelity surfaces
 
-- 桌面端标题、分隔线、成员卡片、产品卡片和案例图片区块层级清晰
-- 移动端内容按单列重排，标题和正文未越界，图片保持比例
-- 顶部导航、产品入口和联系二维码在两个视口下均可辨认
-- 优化后的李祖贵头像自然尺寸为 820 × 1232，页面显示尺寸约为 268 × 360，清晰且无拉伸
+- Typography: exact, because the approved raster artwork is embedded unchanged.
+- Layout and spacing: exact to the supplied artwork; the canvas keeps the source aspect ratio.
+- Colors and effects: exact, including red/blue accents, particle arcs, portraits, and nameplates.
+- Image asset: embedded directly in the HTML as a PNG Base64 data URL.
+- Copy: exact to the approved reference, with the brand unified as “AI企业落地团队”.
 
-## 生产检查
+## Initial state
 
-- 生产首页、团队介绍源文件、产品与案例页、favicon 和 15 份产品说明均返回 HTTP 200
-- 生产首页 SHA-256 与本地构建产物完全一致
-- 生产产品页与本地构建产物仅有跨平台换行差异，归一化后内容完全一致
-- HTTPS 强制启用，响应包含 HSTS
+- Body starts with `landing-locked`.
+- Only the landing gate is rendered; the existing site header, content, and footer are hidden.
+- Document height equals viewport height; vertical and horizontal scrolling are disabled.
+- Responsive check at 390 × 844 passed with no overflow.
 
-final result: passed
+## Interaction verification
+
+- “查看团队介绍” unlocks the page, hides the gate, and opens `#overview` with the section aligned below the sticky header.
+- “联系我们” unlocks the page, hides the gate, and scrolls to `#contact`.
+- Both hit areas are semantic buttons with accessible names and keyboard focus styles.
+- Browser console: no errors.
+
+## Comparison history
+
+1. Initial browser comparison identified a two-pixel source-width mismatch.
+2. The landing aspect ratio and intrinsic image width were corrected from 1584 to 1586 px.
+3. Final full-view and focused CTA comparisons passed with no material differences.

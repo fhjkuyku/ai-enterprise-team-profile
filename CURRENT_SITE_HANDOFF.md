@@ -4,12 +4,13 @@
 - 托管平台：GitHub Pages
 - 生产地址：https://fhjkuyku.github.io/ai-enterprise-team-profile/
 - GitHub 仓库：https://github.com/fhjkuyku/ai-enterprise-team-profile
-- 内容发布基线：`a6b9cb6f658cdefe3d0fee93a86be942919219ee`
+- 内容发布基线：`main` 最新发布提交
 - 自动发布：`.github/workflows/pages.yml`
 - 持续集成：`.github/workflows/ci.yml`
 - 源码入口：`AI企业落地团队介绍.html`
 - 构建入口：`dist/index.html`
-- 产品入口：`产品与案例/产品与案例.html`
+- 产品入口：主页面 `AI企业落地团队介绍.html#products`
+- 产品说明：`产品与案例/产品说明文档/` 下 15 份独立 HTML
 - 图片策略：团队头像、二维码和案例图片均嵌入 HTML，无外部图片目录依赖
 - 转化上线：不适用；当前没有表单、支付、会员、Webhook 或服务端函数
 
@@ -20,13 +21,13 @@
 - `npm audit --omit=dev`：0 个漏洞
 - GitHub Actions 持续集成：通过
 - GitHub Pages 自动部署：通过
-- 生产环境：首页、产品与案例页、15 份产品说明及 favicon 均返回 HTTP 200
+- 生产环境：首页、15 份产品说明及 favicon 均返回 HTTP 200
 - HTTPS：已强制启用，生产响应包含 HSTS
 - 页面内容：生产首页与本地构建产物一致；产品页经换行归一化后与本地构建产物一致
 
 ## 回滚方式
 
-如需回滚内容，可在 Git 中回退到上一稳定版本 `b18fed6`，推送后由 GitHub Pages 工作流自动重新发布；也可在 GitHub Actions 中重新运行对应历史提交的部署工作流。
+如需回滚本次改版，可在 Git 中回退到上一线上稳定版本 `37925da`，推送后由 GitHub Pages 工作流自动重新发布；也可在 GitHub Actions 中重新运行对应历史提交的部署工作流。
 
 ## 已知边界
 
