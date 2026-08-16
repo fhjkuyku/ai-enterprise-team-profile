@@ -47,6 +47,20 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;letter-spacing:.08e
 <body>
 
 <a class="team-return" href="../AI企业落地团队介绍.html?from=services#services" aria-label="返回AI企业落地团队介绍的服务与报价模块">← 返回团队介绍</a>
+<script id="service-return-script">
+  (function () {
+    const button = document.querySelector(".team-return");
+    if (!button) return;
+    button.addEventListener("click", function (event) {
+      const returnUrl = new URLSearchParams(location.search).get("return");
+      if (returnUrl) {
+        event.preventDefault();
+        location.href = returnUrl;
+        return;
+      }
+    });
+  })();
+</script>
 
 <header class="hero">
   <div class="inner">
