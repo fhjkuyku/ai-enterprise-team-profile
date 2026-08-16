@@ -25,7 +25,7 @@ async function collectHtml(directory) {
 
 const main = await readFile(mainPath, "utf8");
 
-assert((main.match(/<img src="data:image\/(?:jpeg|png);base64,/g) || []).length === 9, "Expected six team/contact images and three case images");
+assert((main.match(/<img src="data:image\/(?:jpeg|png);base64,/g) || []).length === 10, "Expected seven team/contact images and three case images");
 assert(!main.includes("./图片/"), "External image-folder dependency remains");
 assert(!main.includes("./产品与案例/产品与案例.html"), "Obsolete intermediate product-page link remains");
 assert(main.includes('id="productCarousel"'), "Integrated product carousel is missing");
@@ -46,6 +46,8 @@ assert(main.includes('function isServicePricingReturn()'), "Services return must
 assert(/<div class="section-index"><span>01<\/span><\/div>\s*<h2 id="ability-title">/.test(main), "Team ability subsection must be numbered 01");
 assert(/<div class="section-index"><span>02<\/span><\/div>\s*<h2 id="division-title">/.test(main), "Team division subsection must be numbered 02");
 assert(/<div class="section-index"><span>03<\/span><\/div>\s*<h2 id="members-title">/.test(main), "Team members subsection must be numbered 03");
+assert(main.includes("秦真鹏") && main.includes("深圳市福田区政务服务和数据管理局数据管理专家"), "Qin Zhenpeng profile or Futian data-management expert credential is missing");
+assert(main.includes("四位核心成员覆盖企业战略"), "Four-member team summary is missing");
 assert(main.includes('<h3><span>先用小成本验证价值</span><span>再决定是否放大</span></h3>'), "Services headline must stay on the approved two lines");
 
 const servicePricingPath = join(root, "产品与案例", "服务与报价.html");
