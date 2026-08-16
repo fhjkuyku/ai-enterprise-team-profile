@@ -78,13 +78,12 @@ h1,h2,h3,p{margin-top:0}h1{font-family:"STKaiti","KaiTi","Microsoft YaHei",sans-
       button.addEventListener("click", function (event) {
         const params = new URLSearchParams(location.search);
         const returnTarget = params.get("return");
-        if (!returnTarget) {
-          if (params.get("from") === "team" && history.length > 1) {
-            event.preventDefault();
-            history.back();
-          }
+        if (params.get("from") === "team" && history.length > 1) {
+          event.preventDefault();
+          history.back();
           return;
         }
+        if (!returnTarget) return;
         try {
           const returnUrl = new URL(returnTarget, location.href);
           if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;

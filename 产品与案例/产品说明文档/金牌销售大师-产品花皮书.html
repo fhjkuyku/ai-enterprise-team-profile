@@ -281,13 +281,12 @@ section.page:nth-of-type(6)>.training-bottom{grid-column:2;grid-row:3}
       button.addEventListener("click", function (event) {
         const params = new URLSearchParams(location.search);
         const returnTarget = params.get("return");
-        if (!returnTarget) {
-          if (params.get("from") === "team" && history.length > 1) {
-            event.preventDefault();
-            history.back();
-          }
+        if (params.get("from") === "team" && history.length > 1) {
+          event.preventDefault();
+          history.back();
           return;
         }
+        if (!returnTarget) return;
         try {
           const returnUrl = new URL(returnTarget, location.href);
           if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;

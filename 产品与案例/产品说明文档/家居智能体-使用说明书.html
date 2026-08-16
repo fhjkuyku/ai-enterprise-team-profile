@@ -87,13 +87,12 @@
       button.addEventListener("click", function (event) {
         const params = new URLSearchParams(location.search);
         const returnTarget = params.get("return");
-        if (!returnTarget) {
-          if (params.get("from") === "team" && history.length > 1) {
-            event.preventDefault();
-            history.back();
-          }
+        if (params.get("from") === "team" && history.length > 1) {
+          event.preventDefault();
+          history.back();
           return;
         }
+        if (!returnTarget) return;
         try {
           const returnUrl = new URL(returnTarget, location.href);
           if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
@@ -111,61 +110,61 @@
   </header>
   <main>
       <section class="page" id="page-1" aria-label="Page 1 of 19">
-        <img src="家居智能体-使用说明书_assets/001.jpg" alt="家居智能体-使用说明书 - page 1" loading="eager" decoding="async">
+        <img loading="eager" decoding="async" fetchpriority="high" src="家居智能体-使用说明书_assets/001.jpg" alt="家居智能体-使用说明书 - page 1">
       </section>
       <section class="page" id="page-2" aria-label="Page 2 of 19">
-        <img src="家居智能体-使用说明书_assets/002.jpg" alt="家居智能体-使用说明书 - page 2" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/002.jpg" alt="家居智能体-使用说明书 - page 2">
       </section>
       <section class="page" id="page-3" aria-label="Page 3 of 19">
-        <img src="家居智能体-使用说明书_assets/003.jpg" alt="家居智能体-使用说明书 - page 3" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/003.jpg" alt="家居智能体-使用说明书 - page 3">
       </section>
       <section class="page" id="page-4" aria-label="Page 4 of 19">
-        <img src="家居智能体-使用说明书_assets/004.jpg" alt="家居智能体-使用说明书 - page 4" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/004.jpg" alt="家居智能体-使用说明书 - page 4">
       </section>
       <section class="page" id="page-5" aria-label="Page 5 of 19">
-        <img src="家居智能体-使用说明书_assets/005.jpg" alt="家居智能体-使用说明书 - page 5" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/005.jpg" alt="家居智能体-使用说明书 - page 5">
       </section>
       <section class="page" id="page-6" aria-label="Page 6 of 19">
-        <img src="家居智能体-使用说明书_assets/006.jpg" alt="家居智能体-使用说明书 - page 6" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/006.jpg" alt="家居智能体-使用说明书 - page 6">
       </section>
       <section class="page" id="page-7" aria-label="Page 7 of 19">
-        <img src="家居智能体-使用说明书_assets/007.jpg" alt="家居智能体-使用说明书 - page 7" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/007.jpg" alt="家居智能体-使用说明书 - page 7">
       </section>
       <section class="page" id="page-8" aria-label="Page 8 of 19">
-        <img src="家居智能体-使用说明书_assets/008.jpg" alt="家居智能体-使用说明书 - page 8" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/008.jpg" alt="家居智能体-使用说明书 - page 8">
       </section>
       <section class="page" id="page-9" aria-label="Page 9 of 19">
-        <img src="家居智能体-使用说明书_assets/009.jpg" alt="家居智能体-使用说明书 - page 9" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/009.jpg" alt="家居智能体-使用说明书 - page 9">
       </section>
       <section class="page" id="page-10" aria-label="Page 10 of 19">
-        <img src="家居智能体-使用说明书_assets/010.jpg" alt="家居智能体-使用说明书 - page 10" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/010.jpg" alt="家居智能体-使用说明书 - page 10">
       </section>
       <section class="page" id="page-11" aria-label="Page 11 of 19">
-        <img src="家居智能体-使用说明书_assets/011.jpg" alt="家居智能体-使用说明书 - page 11" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/011.jpg" alt="家居智能体-使用说明书 - page 11">
       </section>
       <section class="page" id="page-12" aria-label="Page 12 of 19">
-        <img src="家居智能体-使用说明书_assets/012.jpg" alt="家居智能体-使用说明书 - page 12" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/012.jpg" alt="家居智能体-使用说明书 - page 12">
       </section>
       <section class="page" id="page-13" aria-label="Page 13 of 19">
-        <img src="家居智能体-使用说明书_assets/013.jpg" alt="家居智能体-使用说明书 - page 13" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/013.jpg" alt="家居智能体-使用说明书 - page 13">
       </section>
       <section class="page" id="page-14" aria-label="Page 14 of 19">
-        <img src="家居智能体-使用说明书_assets/014.jpg" alt="家居智能体-使用说明书 - page 14" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/014.jpg" alt="家居智能体-使用说明书 - page 14">
       </section>
       <section class="page" id="page-15" aria-label="Page 15 of 19">
-        <img src="家居智能体-使用说明书_assets/015.jpg" alt="家居智能体-使用说明书 - page 15" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/015.jpg" alt="家居智能体-使用说明书 - page 15">
       </section>
       <section class="page" id="page-16" aria-label="Page 16 of 19">
-        <img src="家居智能体-使用说明书_assets/016.jpg" alt="家居智能体-使用说明书 - page 16" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/016.jpg" alt="家居智能体-使用说明书 - page 16">
       </section>
       <section class="page" id="page-17" aria-label="Page 17 of 19">
-        <img src="家居智能体-使用说明书_assets/017.jpg" alt="家居智能体-使用说明书 - page 17" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/017.jpg" alt="家居智能体-使用说明书 - page 17">
       </section>
       <section class="page" id="page-18" aria-label="Page 18 of 19">
-        <img src="家居智能体-使用说明书_assets/018.jpg" alt="家居智能体-使用说明书 - page 18" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/018.jpg" alt="家居智能体-使用说明书 - page 18">
       </section>
       <section class="page" id="page-19" aria-label="Page 19 of 19">
-        <img src="家居智能体-使用说明书_assets/019.jpg" alt="家居智能体-使用说明书 - page 19" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="家居智能体-使用说明书_assets/019.jpg" alt="家居智能体-使用说明书 - page 19">
       </section>
   </main>
   <script>

@@ -87,13 +87,12 @@
       button.addEventListener("click", function (event) {
         const params = new URLSearchParams(location.search);
         const returnTarget = params.get("return");
-        if (!returnTarget) {
-          if (params.get("from") === "team" && history.length > 1) {
-            event.preventDefault();
-            history.back();
-          }
+        if (params.get("from") === "team" && history.length > 1) {
+          event.preventDefault();
+          history.back();
           return;
         }
+        if (!returnTarget) return;
         try {
           const returnUrl = new URL(returnTarget, location.href);
           if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
@@ -111,13 +110,13 @@
   </header>
   <main>
       <section class="page" id="page-1" aria-label="Page 1 of 3">
-        <img src="IP-OS操盘工作台-产品花皮书_assets/001.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 1" loading="eager" decoding="async">
+        <img loading="eager" decoding="async" fetchpriority="high" src="IP-OS操盘工作台-产品花皮书_assets/001.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 1">
       </section>
       <section class="page" id="page-2" aria-label="Page 2 of 3">
-        <img src="IP-OS操盘工作台-产品花皮书_assets/002.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 2" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="IP-OS操盘工作台-产品花皮书_assets/002.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 2">
       </section>
       <section class="page" id="page-3" aria-label="Page 3 of 3">
-        <img src="IP-OS操盘工作台-产品花皮书_assets/003.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 3" loading="eager" decoding="async">
+        <img loading="lazy" decoding="async" src="IP-OS操盘工作台-产品花皮书_assets/003.jpg" alt="IP-OS操盘工作台-产品花皮书 - page 3">
       </section>
   </main>
   <script>

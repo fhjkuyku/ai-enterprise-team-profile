@@ -52,7 +52,13 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;letter-spacing:.08e
     const button = document.querySelector(".team-return");
     if (!button) return;
     button.addEventListener("click", function (event) {
-      const returnUrl = new URLSearchParams(location.search).get("return");
+      const params = new URLSearchParams(location.search);
+      const returnUrl = params.get("return");
+      if (params.get("from") === "team" && history.length > 1) {
+        event.preventDefault();
+        history.back();
+        return;
+      }
       if (returnUrl) {
         event.preventDefault();
         location.href = returnUrl;

@@ -70,16 +70,17 @@
     let touchStartX = null;
 
     returnToTeam.addEventListener('click', event => {
-      const returnUrl = new URLSearchParams(location.search).get('return');
+      const params = new URLSearchParams(location.search);
+      const returnUrl = params.get('return');
+      if (params.get('from') === 'team' && history.length > 1) {
+        event.preventDefault();
+        history.back();
+        return;
+      }
       if (returnUrl) {
         event.preventDefault();
         location.href = returnUrl;
         return;
-      }
-      const cameFromTeamPage = new URLSearchParams(location.search).get('from') === 'team';
-      if (cameFromTeamPage && history.length > 1) {
-        event.preventDefault();
-        history.back();
       }
     });
 

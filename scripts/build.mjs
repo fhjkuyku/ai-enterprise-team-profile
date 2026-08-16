@@ -38,10 +38,10 @@ for (const relativePath of linkedDetailPages) {
   let imageIndex = 0;
   const optimizedHtml = detailHtml.replace(/<img\b[^>]*>/gi, (tag) => {
     imageIndex += 1;
-    if (/\bloading\s*=/i.test(tag)) return tag;
+    const cleanTag = tag.replace(/\s+(?:loading|decoding|fetchpriority)\s*=\s*(["'])[^"']*\1/gi, "");
     const loading = imageIndex === 1 ? "eager" : "lazy";
     const priority = imageIndex === 1 ? ' fetchpriority="high"' : "";
-    return tag.replace(/^<img\b/i, `<img loading="${loading}" decoding="async"${priority}`);
+    return cleanTag.replace(/^<img\b/i, `<img loading="${loading}" decoding="async"${priority}`);
   });
   await writeFile(destination, optimizedHtml, "utf8");
 

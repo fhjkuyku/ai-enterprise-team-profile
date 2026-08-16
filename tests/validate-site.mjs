@@ -7,6 +7,7 @@ const mainPath = join(root, "AI企业落地团队介绍.html");
 const productCasesDir = join(root, "产品与案例");
 const productDocsDir = join(root, "产品与案例", "产品说明文档");
 const consultantProfilePath = join(root, "产品与案例", "8.16华链--顾问介绍V7.html");
+const companyProfilePath = join(root, "产品与案例", "华链集团公司介绍202602简版.html");
 
 const assert = (condition, message) => {
   if (!condition) throw new Error(message);
@@ -51,6 +52,8 @@ assert(main.includes('id="servicesDetailLink"') && main.includes('href="./产品
 assert(main.includes('function isServicePricingReturn()'), "Services return must bypass the landing screen");
 assert(main.includes('returnUrl.searchParams.set("serviceReturnY", String(Math.round(window.scrollY)))'), "Services entry must remember its exact scroll position");
 assert(main.includes('detailUrl.searchParams.set("return", returnUrl.href)'), "Services detail link must carry the entry-page return address");
+assert(main.includes('detailUrl.searchParams.set("from", "team")'), "Services detail link must enable fast history return");
+assert(/detailUrl\.searchParams\.set\("return", returnUrl\.href\);\s*history\.replaceState\(null, "", returnUrl\.href\);\s*location\.href = detailUrl\.href;/.test(main), "Services entry state must be saved before navigation");
 assert(main.includes('function restoreServicePosition()'), "Services return must restore the saved entry position");
 assert(main.includes('const savedReturnY = pageUrl.searchParams.get("memberReturnY");') && main.includes('if (savedReturnY === null) return;'), "Missing member return state must not be treated as scroll position 0");
 assert(main.includes('const savedReturnY = pageUrl.searchParams.get("serviceReturnY");'), "Missing service return state must not be treated as scroll position 0");
@@ -72,6 +75,7 @@ assert(servicePricing.includes('class="team-return"'), "Team return button is mi
 assert(servicePricing.includes('href="../AI企业落地团队介绍.html?from=services#services"'), "Services and pricing return path is incorrect");
 assert(servicePricing.includes('id="service-return-script"'), "Services and pricing return-state script is missing");
 assert(servicePricing.includes('location.href = returnUrl'), "Services return button must navigate to the carried entry-page address");
+assert(servicePricing.indexOf('history.back()') < servicePricing.indexOf('location.href = returnUrl'), "Services return must prefer browser history before URL fallback");
 assert(servicePricing.includes("AI企业落地 · 服务与报价"), "Services and pricing title was not updated to AI企业落地");
 assert(!servicePricing.includes("AI 数字化转型") && !servicePricing.includes("AI数字化转型"), "Legacy AI数字化转型 copy remains in the services page");
 assert(servicePricing.includes("公开体验课") && servicePricing.includes("免费 / 99 元"), "New public experience class pricing is missing");
@@ -108,12 +112,17 @@ for (const productDocPath of productDocFiles) {
   assert(productDoc.includes('class="team-return-button"'), `Team return button is missing in ${productDocPath}`);
   assert(productDoc.includes(`href="../../AI企业落地团队介绍.html?product=${productId}#product-gallery"`), `Exact team return path is incorrect in ${productDocPath}`);
   assert(productDoc.includes('id="team-return-script"'), `Team return-state script is missing in ${productDocPath}`);
+  assert(productDoc.indexOf('history.back()') < productDoc.indexOf('location.href = returnUrl.href'), `Product return must prefer browser history in ${productDocPath}`);
 }
 
 const consultantProfile = await readFile(consultantProfilePath, "utf8");
 assert(consultantProfile.includes('id="return-to-team"'), "Consultant introduction return button is missing");
 assert(consultantProfile.includes("location.href = returnUrl;"), "Consultant introduction does not use its entry-page return address");
 assert(consultantProfile.includes("const slideUrl = new URL(location.href);"), "Consultant slide navigation must preserve the entry-page return address");
+assert(consultantProfile.indexOf("history.back()") < consultantProfile.indexOf("location.href = returnUrl;"), "Consultant return must prefer browser history");
+
+const companyProfile = await readFile(companyProfilePath, "utf8");
+assert(companyProfile.indexOf("history.back()") < companyProfile.indexOf("location.href = returnUrl;"), "Company profile return must prefer browser history");
 
 let extractedImageCount = 0;
 for (const childHtmlPath of await collectHtml(productCasesDir)) {
@@ -121,6 +130,10 @@ for (const childHtmlPath of await collectHtml(productCasesDir)) {
   assert(!childHtml.includes("data:image/"), `Embedded Base64 image remains in ${childHtmlPath}`);
   const imageTags = [...childHtml.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
   assert(imageTags.every((tag) => /\bloading="(?:eager|lazy)"/i.test(tag) && /\bdecoding="async"/i.test(tag)), `Image loading attributes are incomplete in ${childHtmlPath}`);
+  if (imageTags.length) {
+    assert(/\bloading="eager"/i.test(imageTags[0]) && /\bfetchpriority="high"/i.test(imageTags[0]), `First image must load eagerly in ${childHtmlPath}`);
+    assert(imageTags.slice(1).every((tag) => /\bloading="lazy"/i.test(tag) && !/\bfetchpriority=/i.test(tag)), `Only the first image may load eagerly in ${childHtmlPath}`);
+  }
   extractedImageCount += imageTags.length;
 }
 assert(extractedImageCount === 156, `Expected 156 extracted child-page images, found ${extractedImageCount}`);
