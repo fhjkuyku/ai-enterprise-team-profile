@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const mainPath = join(root, "AI企业落地团队介绍.html");
 const productDocsDir = join(root, "产品与案例", "产品说明文档");
+const consultantProfilePath = join(root, "产品与案例", "8.16华链--顾问介绍V7.html");
 
 const assert = (condition, message) => {
   if (!condition) throw new Error(message);
@@ -53,6 +54,10 @@ assert(/<div class="section-index"><span>01<\/span><\/div>\s*<h2 id="ability-tit
 assert(/<div class="section-index"><span>02<\/span><\/div>\s*<h2 id="division-title">/.test(main), "Team division subsection must be numbered 02");
 assert(/<div class="section-index"><span>03<\/span><\/div>\s*<h2 id="members-title">/.test(main), "Team members subsection must be numbered 03");
 assert(main.includes("秦真鹏") && main.includes("深圳市福田区政务服务和数据管理局数据管理专家"), "Qin Zhenpeng profile or Futian data-management expert credential is missing");
+assert(!main.includes('id="qinProfileLink"'), "Qin Zhenpeng's name should not remain a detail-page link");
+assert(main.includes('href="产品与案例/华链集团公司介绍202602简版.html#1"') && main.includes("华链软件集团介绍"), "Hualian Software Group introduction link is missing");
+assert(main.includes('href="产品与案例/8.16华链--顾问介绍V7.html#1"') && main.includes("华链顾问"), "Hualian consultant introduction link is missing");
+assert((main.match(/data-member-detail-link/g) || []).length === 3, "The two Qin detail links and their shared selector are incomplete");
 assert(main.includes("四位核心成员覆盖企业战略"), "Four-member team summary is missing");
 assert(main.includes('<h3><span>先用小成本验证价值</span><span>再决定是否放大</span></h3>'), "Services headline must stay on the approved two lines");
 
@@ -99,6 +104,11 @@ for (const productDocPath of productDocFiles) {
   assert(productDoc.includes(`href="../../AI企业落地团队介绍.html?product=${productId}#product-gallery"`), `Exact team return path is incorrect in ${productDocPath}`);
   assert(productDoc.includes('id="team-return-script"'), `Team return-state script is missing in ${productDocPath}`);
 }
+
+const consultantProfile = await readFile(consultantProfilePath, "utf8");
+assert(consultantProfile.includes('id="return-to-team"'), "Consultant introduction return button is missing");
+assert(consultantProfile.includes("location.href = returnUrl;"), "Consultant introduction does not use its entry-page return address");
+assert(consultantProfile.includes("const slideUrl = new URL(location.href);"), "Consultant slide navigation must preserve the entry-page return address");
 
 const missing = [];
 for (const htmlPath of await collectHtml(root)) {
