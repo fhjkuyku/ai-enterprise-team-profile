@@ -1,3 +1,143 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:49326662063c742140aaac21c86d39a87918b696b14cbb0a813323f8d5255a90
-size 740552
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>1688图文二创工作台-快速操作花皮书</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html { background: #11151c; scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: #11151c; color: #f7f8fa; }
+    .toolbar {
+      position: fixed; inset: 0 0 auto 0; z-index: 10; height: 48px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 18px; background: rgba(17, 21, 28, .9); border-bottom: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 600; }
+    .counter { flex: 0 0 auto; color: #c8d0dc; font-size: 13px; font-variant-numeric: tabular-nums; }
+    main { padding: 66px 18px 24px; display: grid; gap: 18px; justify-items: center; }
+    .page {
+      width: min(calc(100vw - 36px), calc((100vh - 90px) * 1.4143));
+      aspect-ratio: 1.4143 / 1; display: grid; place-items: center; overflow: hidden;
+      background: #fff; border-radius: 4px; box-shadow: 0 16px 48px rgba(0,0,0,.35);
+      scroll-margin-top: 66px; scroll-snap-align: start;
+    }
+    .page img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+    @media (min-width: 900px) { main { scroll-snap-type: y proximity; } }
+    @media print {
+      @page { size: A4 landscape; margin: 0; }
+      html, body { background: #fff; }
+      .toolbar { display: none; }
+      main { display: block; padding: 0; }
+      .page { width: 297mm; height: 210mm; margin: 0; border-radius: 0; box-shadow: none; break-after: page; }
+    }
+  </style>
+</head>
+<body>
+  <style id="team-return-style">
+    .team-return-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 15px;
+      color: #fff !important;
+      background: rgba(11, 13, 17, .96);
+      border: 1px solid rgba(255, 255, 255, .58);
+      outline: 4px solid rgba(11, 13, 17, .78);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .24);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 800;
+      text-decoration: none !important;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .team-return-button:hover {
+      color: #fff !important;
+      background: #155eef;
+      border-color: #8eb2ff;
+      transform: translateY(-1px);
+    }
+    .team-return-button:focus-visible {
+      outline: 4px solid rgba(21, 94, 239, .32);
+      outline-offset: 3px;
+    }
+    @media (max-width: 560px) {
+      .team-return-button { top: 12px; left: 12px; min-height: 38px; padding: 0 12px; font-size: 12px; }
+    }
+    @media print {
+      .team-return-button { display: none !important; }
+    }
+  </style>
+  <a class="team-return-button" href="../../AI企业落地团队介绍.html?product=1688#product-gallery" aria-label="返回AI企业落地团队介绍">← 返回团队介绍</a>
+  <script id="team-return-script">
+    (function () {
+      const button = document.querySelector(".team-return-button");
+      if (!button) return;
+      button.addEventListener("click", function (event) {
+        const params = new URLSearchParams(location.search);
+        const returnTarget = params.get("return");
+        if (!returnTarget) {
+          if (params.get("from") === "team" && history.length > 1) {
+            event.preventDefault();
+            history.back();
+          }
+          return;
+        }
+        try {
+          const returnUrl = new URL(returnTarget, location.href);
+          if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
+          event.preventDefault();
+          location.href = returnUrl.href;
+        } catch (error) {
+          // Invalid return targets fall back to this product's carousel entry.
+        }
+      });
+    })();
+  </script>
+  <header class="toolbar">
+    <div class="title">1688图文二创工作台-快速操作花皮书</div>
+    <div class="counter" aria-live="polite"><span id="currentPage">1</span> / 3</div>
+  </header>
+  <main>
+      <section class="page" id="page-1" aria-label="Page 1 of 3">
+        <img src="1688图文二创工作台-快速操作花皮书_assets/001.jpg" alt="1688图文二创工作台-快速操作花皮书 - page 1" loading="eager" decoding="async">
+      </section>
+      <section class="page" id="page-2" aria-label="Page 2 of 3">
+        <img src="1688图文二创工作台-快速操作花皮书_assets/002.jpg" alt="1688图文二创工作台-快速操作花皮书 - page 2" loading="eager" decoding="async">
+      </section>
+      <section class="page" id="page-3" aria-label="Page 3 of 3">
+        <img src="1688图文二创工作台-快速操作花皮书_assets/003.jpg" alt="1688图文二创工作台-快速操作花皮书 - page 3" loading="eager" decoding="async">
+      </section>
+  </main>
+  <script>
+    (() => {
+      const pages = [...document.querySelectorAll('.page')];
+      const current = document.getElementById('currentPage');
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) current.textContent = String(pages.indexOf(visible.target) + 1);
+      }, { threshold: [0.35, 0.6, 0.85] });
+      pages.forEach((page) => observer.observe(page));
+      document.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowRight', 'PageDown', 'ArrowUp', 'ArrowLeft', 'PageUp'].includes(event.key)) return;
+        event.preventDefault();
+        const index = Math.max(0, Number(current.textContent) - 1);
+        const direction = ['ArrowDown', 'ArrowRight', 'PageDown'].includes(event.key) ? 1 : -1;
+        pages[Math.min(pages.length - 1, Math.max(0, index + direction))].scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

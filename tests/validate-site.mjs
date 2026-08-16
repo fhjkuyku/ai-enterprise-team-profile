@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const mainPath = join(root, "AI企业落地团队介绍.html");
+const productCasesDir = join(root, "产品与案例");
 const productDocsDir = join(root, "产品与案例", "产品说明文档");
 const consultantProfilePath = join(root, "产品与案例", "8.16华链--顾问介绍V7.html");
 
@@ -26,7 +27,8 @@ async function collectHtml(directory) {
 
 const main = await readFile(mainPath, "utf8");
 
-assert((main.match(/<img src="data:image\/(?:jpeg|png);base64,/g) || []).length === 10, "Expected seven team/contact images and three case images");
+assert((main.match(/<img\b[^>]*src="data:image\/(?:jpeg|png);base64,/g) || []).length === 11, "Expected the landing image, seven team/contact images, and three case images");
+assert((main.match(/<img\b(?=[^>]*loading="lazy")(?=[^>]*src="data:image\/(?:jpeg|png);base64,)[^>]*>/g) || []).length === 10, "Below-the-fold team, contact, and case images must load lazily");
 assert(!main.includes("./图片/"), "External image-folder dependency remains");
 assert(!main.includes("./产品与案例/产品与案例.html"), "Obsolete intermediate product-page link remains");
 assert(main.includes('id="productCarousel"'), "Integrated product carousel is missing");
@@ -40,7 +42,10 @@ assert(main.includes('returnUrl.searchParams.set("product", product.id)'), "Prod
 assert(main.indexOf('productUrl.searchParams.set("return", returnUrl.href)') < main.indexOf('card.addEventListener("click"'), "Product return-state must be embedded before click navigation");
 assert(main.includes('restoreProductFromLocation'), "Carousel state restoration is missing");
 assert(main.includes('function isProductGalleryReturn()'), "Product return must bypass the landing screen");
-assert(main.includes('if (isProductGalleryReturn() || isServicePricingReturn()) {') && main.includes('document.body.classList.remove("landing-locked")'), "Landing screen is not dismissed for inner-page returns");
+assert(main.includes('<section class="landing-gate" id="landingGate"'), "Landing page is missing from the document flow");
+assert(!main.includes('<body class="landing-locked">') && !main.includes('body.landing-locked >'), "Landing page should no longer lock or hide the team content");
+assert(main.includes('target.scrollIntoView({ block: "start", behavior: "smooth" })'), "Landing buttons must smoothly reveal the requested section");
+assert(main.includes('landingGate.scrollIntoView({ block: "start", behavior: "smooth" })'), "Home navigation must return to the retained landing page");
 assert(main.includes('id="services"'), "Services and pricing section is missing");
 assert(main.includes('id="servicesDetailLink"') && main.includes('href="./产品与案例/服务与报价.html"'), "Services and pricing detail link is missing");
 assert(main.includes('function isServicePricingReturn()'), "Services return must bypass the landing screen");
@@ -109,6 +114,16 @@ const consultantProfile = await readFile(consultantProfilePath, "utf8");
 assert(consultantProfile.includes('id="return-to-team"'), "Consultant introduction return button is missing");
 assert(consultantProfile.includes("location.href = returnUrl;"), "Consultant introduction does not use its entry-page return address");
 assert(consultantProfile.includes("const slideUrl = new URL(location.href);"), "Consultant slide navigation must preserve the entry-page return address");
+
+let extractedImageCount = 0;
+for (const childHtmlPath of await collectHtml(productCasesDir)) {
+  const childHtml = await readFile(childHtmlPath, "utf8");
+  assert(!childHtml.includes("data:image/"), `Embedded Base64 image remains in ${childHtmlPath}`);
+  const imageTags = [...childHtml.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  assert(imageTags.every((tag) => /\bloading="(?:eager|lazy)"/i.test(tag) && /\bdecoding="async"/i.test(tag)), `Image loading attributes are incomplete in ${childHtmlPath}`);
+  extractedImageCount += imageTags.length;
+}
+assert(extractedImageCount === 156, `Expected 156 extracted child-page images, found ${extractedImageCount}`);
 
 const missing = [];
 for (const htmlPath of await collectHtml(root)) {

@@ -1,3 +1,340 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f5ae08eb48163bccfb77f19179d53ddf28ba164de11826ec5909f8342cf8c995
-size 1964670
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>旅图种草引擎｜旅游内容全流程与效果说明</title>
+  <style>
+    :root{--paper:#fffaf0;--paper2:#f4ead5;--ink:#173330;--muted:#697873;--teal:#0d6259;--deep:#123f3b;--gold:#c9973e;--gold2:#efd8a4;--red:#a44735;--line:#ddd0b8;--white:#fff;--mint:#e6f1ec;--night:#102e2b}
+    *{box-sizing:border-box}html{background:#dfe3e1}body{margin:0;color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;background:#dfe3e1;line-height:1.58}main{padding:24px 0 60px}
+    .page{position:relative;width:297mm;height:210mm;margin:0 auto 24px;padding:12mm 16mm 11mm;background:var(--paper);overflow:hidden;page-break-after:always;box-shadow:0 18px 48px rgba(25,47,43,.16)}
+    .page:after{content:"";position:absolute;inset:6mm;border:1px solid rgba(201,151,62,.28);pointer-events:none}.num{position:absolute;right:17mm;bottom:7mm;font:9px Georgia,serif;color:#908a7d;letter-spacing:.15em}.run{position:absolute;left:17mm;bottom:7mm;font-size:8px;color:#9c9688;letter-spacing:.2em}
+    h1,h2,h3,h4,p{margin-top:0}h1{font-family:"STKaiti","KaiTi",serif;font-size:44px;line-height:1.12;margin-bottom:10px;letter-spacing:.03em}h2{font-family:"STKaiti","KaiTi",serif;font-size:27px;line-height:1.2;margin-bottom:7px;color:var(--deep)}h3{font-size:15px;color:var(--teal);margin-bottom:5px}h4{font-size:11px;margin-bottom:4px}p{font-size:11px;color:#3e504c;margin-bottom:7px}.lead{font-size:15px;line-height:1.72;color:#2b4b46}.tiny{font-size:8.5px;color:#85867d}.eyebrow{font-size:9px;letter-spacing:.22em;color:var(--gold);font-weight:800;text-transform:uppercase}.rule{width:52px;height:3px;background:var(--gold);margin:8px 0 13px;border-radius:99px}
+    .head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:10px}.head-index{font:34px/1 Georgia,serif;color:var(--gold)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:17px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.tagrow{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0}.tag{font-size:9px;border:1px solid #c6b785;border-radius:999px;padding:4px 9px;background:#fff9ed;color:#5d5330}.tag.dark{background:var(--deep);border-color:var(--deep);color:#fff}.tag.gold{background:var(--gold2);border-color:var(--gold2);color:#5e461e}
+    .callout{border-left:4px solid var(--gold);background:#fff3d7;padding:9px 12px;margin:9px 0}.callout.teal{border-color:var(--teal);background:var(--mint)}.callout p{margin:0}.warning{border:1px solid #d9ada2;background:#fff0eb;color:#703b31;padding:8px 10px;font-size:10px}.metricbar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:12px 0}.metric{padding:8px 10px;border-right:1px solid var(--line)}.metric:last-child{border-right:0}.metric b{display:block;font:22px Georgia,serif;color:var(--teal)}.metric span{font-size:8.5px;color:var(--muted)}
+    .cover{background:linear-gradient(142deg,#fffaf0 0%,#f6ead5 62%,#e5efea 100%)}.cover:before{content:"";position:absolute;width:250mm;height:150mm;border-radius:50%;border:1px solid rgba(13,98,89,.17);left:-100mm;bottom:-85mm;box-shadow:0 0 0 14mm rgba(201,151,62,.04),0 0 0 28mm rgba(13,98,89,.03)}.cover-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center;height:160mm}.brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}.brand i{font-style:normal;width:34px;height:34px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;background:#fff;font:18px "STKaiti","KaiTi",serif;color:var(--teal)}.brand b{font-size:11px;letter-spacing:.16em}.hero{position:relative;background:#fff;padding:7px;border:1px solid var(--line);box-shadow:0 14px 34px rgba(45,50,43,.16);transform:rotate(.6deg);height:150mm;display:flex;justify-content:center}.hero img{height:100%;max-width:100%;object-fit:contain}.hero:before{content:"现行工作流海报成品";position:absolute;left:-9px;top:18px;background:var(--red);color:#fff;padding:5px 10px;font-size:8px;letter-spacing:.1em;z-index:2}.cover-foot{position:absolute;left:17mm;right:17mm;bottom:18mm;border-top:1px solid var(--line);padding-top:7px;display:flex;justify-content:space-between;font-size:8.5px;color:#7c786e}
+    .layer{background:#fff;border-top:4px solid var(--teal);padding:11px 12px;min-height:126px}.layer .id{font:20px Georgia,serif;color:var(--gold)}.layer code{font:9px Consolas,monospace;color:var(--teal)}
+    .flow{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin:11px 0}.gate{position:relative;background:#fff;border:1px solid var(--line);padding:8px 6px;min-height:116px}.gate:not(:last-child):after{content:"→";position:absolute;right:-10px;top:42px;color:var(--gold);font-weight:900;z-index:2}.gate i{font:18px Georgia,serif;color:var(--gold);font-style:normal}.gate b{display:block;font-size:10px;color:var(--teal);margin:4px 0}.gate span{display:block;font-size:8px;color:var(--muted);line-height:1.45}
+    .stage{display:grid;grid-template-columns:48px 1fr;gap:10px;background:#fff;border-bottom:1px solid var(--line);padding:8px 10px}.stage-id{font:22px Georgia,serif;color:var(--gold)}.stage-body{display:grid;grid-template-columns:1fr 1.25fr 1.15fr;gap:11px}.stage-body b{display:block;font-size:8px;color:var(--teal);letter-spacing:.1em}.stage-body span{font-size:9px;color:#455651;line-height:1.4}.pass{color:var(--deep)!important;font-weight:700}
+    .steps{counter-reset:n;list-style:none;margin:0;padding:0}.steps li{counter-increment:n;position:relative;padding:0 0 8px 31px;font-size:10px}.steps li:before{content:counter(n);position:absolute;left:0;top:0;width:21px;height:21px;border-radius:50%;background:var(--gold);color:#fff;text-align:center;font:700 11px/21px Georgia,serif}.checks{list-style:none;margin:4px 0;padding:0}.checks li{position:relative;padding:3px 0 3px 19px;font-size:9.5px;border-bottom:1px dotted #ddd2bf}.checks li:before{content:"✓";position:absolute;left:1px;color:var(--teal);font-weight:900}.prompt{position:relative;background:var(--night);color:#eaf4ef;border-radius:6px;padding:11px 13px;font:9.5px/1.58 Consolas,"Microsoft YaHei",monospace;white-space:pre-wrap}.prompt:before{content:"复制使用";position:absolute;right:10px;top:7px;font:8px "Microsoft YaHei";color:#a4bdb7}
+    .folder{background:#14322f;color:#eaf2ef;padding:13px 16px;border-radius:6px;font:9px/1.55 Consolas,"Microsoft YaHei",monospace;white-space:pre}.handoff{background:#fff;border:1px solid var(--line);padding:10px}.handoff .row{display:grid;grid-template-columns:75px 1fr;gap:9px;padding:6px 0;border-bottom:1px solid #eee7d9}.handoff .row:last-child{border-bottom:0}.handoff b{font-size:8.5px;color:var(--teal)}.handoff span{font-size:9.5px}
+    .art{display:block;width:100%;height:100%;object-fit:contain;background:#f7f0e2}.shot{display:flex;flex-direction:column;background:#fff;padding:5px;border:1px solid var(--line);box-shadow:0 8px 20px rgba(40,47,41,.12)}.shot .art{flex:1;min-height:0}.shot figcaption{flex:0 0 auto;font-size:8px;color:var(--muted);padding:5px 1px 0}.real-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:11px;height:355px}.real-main{height:355px}.real-side{display:grid;grid-template-columns:1fr 1fr;gap:11px;height:355px}.real-side figure{height:355px}.real-side img{object-position:center}
+    .quote{position:relative;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 17px;font:16px/1.65 "STKaiti","KaiTi",serif;color:var(--deep)}.quote:before{content:"“";position:absolute;left:1px;top:-10px;font:44px Georgia,serif;color:var(--gold2)}
+    .qa{width:100%;border-collapse:collapse;font-size:8.7px}.qa th,.qa td{border:1px solid var(--line);padding:5px 7px;vertical-align:top}.qa th{background:#ece1c9;text-align:left;color:#51472e}.routeback{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.back{background:#fff;border-top:3px solid var(--gold);padding:8px}.back b{font-size:9px;color:var(--teal)}.back p{font-size:8.7px;margin:3px 0 0}.impl{width:100%;border-collapse:collapse;font-size:8.5px}.impl th,.impl td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:left}.impl th{color:#fff;background:var(--deep)}.impl code{font:8px Consolas,monospace;color:var(--teal)}
+    .source{font-size:8px;color:#858278;border-top:1px solid var(--line);padding-top:6px;margin-top:7px}.nowrap{break-inside:avoid}
+    @media(max-width:1180px){main{padding:10px 0}.page{transform-origin:top center}}
+    @media print{@page{size:A4 landscape;margin:0}html,body,main{background:#fff;margin:0;padding:0}.page{width:297mm;height:210mm;margin:0;box-shadow:none}.page:last-child{page-break-after:auto}}
+  </style>
+</head>
+<body>
+  <style id="team-return-style">
+    .team-return-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 15px;
+      color: #fff !important;
+      background: rgba(11, 13, 17, .96);
+      border: 1px solid rgba(255, 255, 255, .58);
+      outline: 4px solid rgba(11, 13, 17, .78);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .24);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 800;
+      text-decoration: none !important;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .team-return-button:hover {
+      color: #fff !important;
+      background: #155eef;
+      border-color: #8eb2ff;
+      transform: translateY(-1px);
+    }
+    .team-return-button:focus-visible {
+      outline: 4px solid rgba(21, 94, 239, .32);
+      outline-offset: 3px;
+    }
+    @media (max-width: 560px) {
+      .team-return-button { top: 12px; left: 12px; min-height: 38px; padding: 0 12px; font-size: 12px; }
+    }
+    @media print {
+      .team-return-button { display: none !important; }
+    }
+  </style>
+  <a class="team-return-button" href="../../AI企业落地团队介绍.html?product=travel#product-gallery" aria-label="返回AI企业落地团队介绍">← 返回团队介绍</a>
+  <script id="team-return-script">
+    (function () {
+      const button = document.querySelector(".team-return-button");
+      if (!button) return;
+      button.addEventListener("click", function (event) {
+        const params = new URLSearchParams(location.search);
+        const returnTarget = params.get("return");
+        if (!returnTarget) {
+          if (params.get("from") === "team" && history.length > 1) {
+            event.preventDefault();
+            history.back();
+          }
+          return;
+        }
+        try {
+          const returnUrl = new URL(returnTarget, location.href);
+          if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
+          event.preventDefault();
+          location.href = returnUrl.href;
+        } catch (error) {
+          // Invalid return targets fall back to this product's carousel entry.
+        }
+      });
+    })();
+  </script><main>
+
+  <section class="page cover">
+    <div class="cover-grid">
+      <div>
+        <div class="brand"><i>旅</i><b>AI TRAVEL CONTENT PIPELINE</b></div>
+        <div class="eyebrow">WORKFLOW · MANUAL · CASE STUDY</div>
+        <h1>旅游内容全流程<br>与效果说明</h1>
+        <div class="rule"></div>
+        <p class="lead">从一句城市出行需求出发，依次完成可执行路线、每日手绘地图、城市美食图鉴、酒店宣传、旅行海报、小红书图文包与配音短视频。</p>
+        <div class="tagrow"><span class="tag dark">一个统一入口</span><span class="tag gold">P0–P7 阶段门</span><span class="tag">同一案例贯穿</span><span class="tag">可恢复 · 可局部返工</span></div>
+        <div class="callout teal"><p><b>产品定位：</b>不是 8 个独立工具的集合，而是一条前后依赖明确的旅游内容生产线；前一阶段的正式成品，是后一阶段唯一可信的输入。</p></div>
+      </div>
+      <div class="hero"><img loading="eager" decoding="async" fetchpriority="high" src="旅图种草引擎_旅游内容全流程与效果说明_assets/001.jpg" alt="现行工作流旅行海报成品"></div>
+    </div>
+    <div class="cover-foot"><span>旅图种草引擎 · 全流程使用与效果说明</span><span>HTML 单文件交付 · 2026-08-14</span></div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">01 / PRODUCT OVERVIEW</div><h2>从“生成一篇攻略”，升级为内容生产线</h2><div class="rule"></div></div><div class="head-index">01</div></div>
+    <p class="lead">这套流程把最容易断裂的工作拆成连续阶段：路线先解决“能不能走”，视觉再解决“能不能一眼看懂”，发布包装最后解决“能不能直接发”。任何问题都回到最早责任阶段处理。</p>
+    <div class="metricbar">
+      <div class="metric"><b>1</b><span>一个城市需求入口</span></div><div class="metric"><b>8</b><span>P0–P7 八个阶段门</span></div><div class="metric"><b>D</b><span>D 天默认 D 张每日路线图</span></div><div class="metric"><b>1</b><span>一个连续编号发布包</span></div>
+    </div>
+    <div class="grid3">
+      <div class="layer"><span class="id">01</span><h3>先做合理性</h3><p>把到离时间、每日强度、餐食、交通、住宿区域与天气兜底编译成可执行路线。</p><code>需求 → 路线事实源</code></div>
+      <div class="layer"><span class="id">02</span><h3>再做视觉表达</h3><p>每日地图、美食图、酒店图与海报各自承担说明、种草、承接与点击，不互相抢任务。</p><code>路线 → 视觉资产</code></div>
+      <div class="layer"><span class="id">03</span><h3>最后做发布包装</h3><p>按固定顺序组装图片，生成小红书推文、逐图口播、字幕与竖版短视频。</p><code>资产 → 发布包</code></div>
+    </div>
+    <div class="callout"><p><b>核心价值：</b>先把案例身份、路线节奏、每日停靠点和视觉顺序锁清楚，后续文案与视频只消费已通过的成品，不在发布阶段临时补景点、改路线或虚构酒店卖点。</p></div>
+    <div class="grid4">
+      <div><h3>统一命名</h3><p>全程使用“城市-时间-主题”案例名。</p></div><div><h3>阶段验收</h3><p>每一步通过后，下一步才可安全消费。</p></div><div><h3>最小返工</h3><p>只失效受影响阶段与其下游。</p></div><div><h3>干净交付</h3><p>成品目录不混入提示词、草稿和缓存。</p></div>
+    </div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">02</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">02 / SYSTEM ARCHITECTURE</div><h2>三层权威，各管一件事</h2><div class="rule"></div></div><div class="head-index">02</div></div>
+    <p class="lead">“谁有权改什么”比模块数量更重要。流程通过路线事实源、视觉成品和编号发布包，把策划判断、视觉生产与多平台发布彼此隔离。</p>
+    <div class="grid3">
+      <div class="layer"><span class="id">01</span><h3>策划层</h3><p>用户偏好、到离时间、强度、交通与餐食先写入最终路线。后续画面只能表达这条路线，不能反过来发明景点顺序。</p><code>P0 → P1</code></div>
+      <div class="layer"><span class="id">02</span><h3>视觉层</h3><p>路线图、美食图、酒店图与旅行海报按各自合同生产。比例、标题、标签、箭头和实图来源都有独立验收。</p><code>P2 → P5</code></div>
+      <div class="layer"><span class="id">03</span><h3>发布层</h3><p>编号图片是视频场景顺序的唯一依据。推文与口播引用可见成品，不把旧图、候选图或封面重复放进场景。</p><code>P6 → P7</code></div>
+    </div>
+    <h3 style="margin-top:13px">贯穿全流程的 4 份身份信息</h3>
+    <div class="grid4">
+      <div class="handoff"><div class="row"><b>城市</b><span>广州 / 苏州 / 长沙……</span></div><div class="row"><b>时间</b><span>3天2晚 / 周末 / 一日游</span></div></div>
+      <div class="handoff"><div class="row"><b>主题</b><span>登山日出早茶刺激</span></div><div class="row"><b>Case</b><span>城市-时间-主题</span></div></div>
+      <div class="handoff"><div class="row"><b>模式</b><span>路线+美食 / 酒店辅助</span></div><div class="row"><b>画幅</b><span>默认竖版；明确横版才切换</span></div></div>
+      <div class="handoff"><div class="row"><b>发布序</b><span>海报→每日图→美食→酒店</span></div><div class="row"><b>视频序</b><span>严格等于编号图片顺序</span></div></div>
+    </div>
+    <div class="callout teal"><p><b>唯一入口：</b>日常使用只需提出完整旅游生产目标。内部执行会自动调用各阶段能力，但使用者看到的是一条工作流，而不是在多个 Skill 之间手工搬运文件。</p></div>
+    <div class="warning"><b>酒店是条件分支：</b>只有用户明确要求酒店宣传，并且本地酒店资料内存在可用实图时才进入；没有酒店素材不会阻断路线、美食、海报、图文和视频。</div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">03</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">03 / END-TO-END FLOW</div><h2>从一句需求，到可发布图文与短视频</h2><div class="rule"></div></div><div class="head-index">03</div></div>
+    <p class="lead">每个阶段都有明确输入、动作、通过产物和失败去向。下游发现问题时，不“顺手修补”，而是回到负责该事实或画面的阶段。</p>
+    <div class="flow">
+      <div class="gate"><i>P0</i><b>需求准入</b><span>锁定城市、时间、主题、强度、餐食、酒店与视频偏好。</span></div>
+      <div class="gate"><i>P1</i><b>路线定稿</b><span>完整日程、交通预算、住宿区域、风险与兜底。</span></div>
+      <div class="gate"><i>P2</i><b>每日手绘</b><span>一天一图；标题、点位、标签与相邻箭头齐全。</span></div>
+      <div class="gate"><i>P3</i><b>城市美食</b><span>先研究再选品；1–2 页，每页 5–7 种。</span></div>
+      <div class="gate"><i>P4</i><b>酒店承接</b><span>有实图且明确推广时，每家生成 1 张。</span></div>
+      <div class="gate"><i>P5</i><b>海报定调</b><span>选择一个最强主题，生成发布首图与封面源图。</span></div>
+      <div class="gate"><i>P6</i><b>图文打包</b><span>推文、标签、连续编号轮播与独立视频封面。</span></div>
+      <div class="gate"><i>P7</i><b>口播成片</b><span>逐图口播、神经配音、烧录字幕与竖版 MP4。</span></div>
+    </div>
+    <div class="grid2">
+      <div>
+        <h3>两处真正的语义检查点</h3>
+        <div class="handoff"><div class="row"><b>P1 后</b><span>确认路线节奏、每天强度、关键锚点、餐食和住宿区域是否符合真实需求。</span></div><div class="row"><b>P5 后</b><span>确认海报主题、标题与视觉方向，再进入正式发布包与视频。</span></div></div>
+      </div>
+      <div>
+        <h3>允许自动继续的条件</h3>
+        <ul class="checks"><li>路线已能被每日地图安全消费。</li><li>每张视觉成品已通过比例、文字与内容检查。</li><li>编号图片连续，无旧图、重复图和空缺前缀。</li><li>视频封面独立存在，但不进入轮播或视频场景。</li></ul>
+      </div>
+    </div>
+    <div class="callout"><p><b>通过的含义：</b>不是“某个文件已经生成”，而是这个文件已经足够准确、完整，能够被下一阶段安全使用。</p></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">04</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">04 / STAGE GUIDE</div><h2>P0–P3：先把路线和核心视觉做对</h2><div class="rule"></div></div><div class="head-index">04A</div></div>
+    <div class="stage"><div class="stage-id">P0</div><div class="stage-body"><div><b>输入</b><span>城市、时长、到离时间、兴趣、强度、餐食、预算、同行人与限制。</span></div><div><b>处理</b><span>建立统一 Case；缺少会改变结构的信息时最多补问关键问题，其余用明确假设继续。</span></div><div><b>通过产物</b><span class="pass">需求身份锁定：城市-时间-主题；酒店与横竖版分支明确。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P1</div><div class="stage-body"><div><b>输入</b><span>P0 需求、必要的开放/预约/天气与交通事实。</span></div><div><b>处理</b><span>把出门、交通、游玩、吃饭、排队/休息与返程计算成完整日链；正常强度默认 10–14 小时。</span></div><div><b>通过产物</b><span class="pass">最终路线 Markdown：逐日停靠点、时间窗、交通、住宿区域、合理性与调整项。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P2</div><div class="stage-body"><div><b>输入</b><span>P1 已定稿的城市、天数与每日有序停靠点。</span></div><div><b>处理</b><span>每一天生成一张手绘旅行图；N 个点位必须有 N−1 段相邻方向箭头。</span></div><div><b>通过产物</b><span class="pass">D 张最终位图：城市/Day 标题、点位名、地标、编号与箭头完整。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P3</div><div class="stage-body"><div><b>输入</b><span>城市、路线主题、饮食偏好与禁忌。</span></div><div><b>处理</b><span>研究 8–12 个候选食物，再选 5–7 个/页；默认 1 页，证据充分且可清晰分主题时做 2 页。</span></div><div><b>通过产物</b><span class="pass">01/02 连续编号的 3:4 美食图；食物视觉占比至少 70%。</span></div></div></div>
+    <div class="grid3" style="margin-top:11px">
+      <div><h3>路线强度</h3><p>低强度 6–10h；正常 10–14h；特种兵 14–16h。混合强度逐日计算。</p></div><div><h3>交通合同</h3><p>酒店往返首末站建议合计低于 3h；同日相邻两站建议低于 1h。</p></div><div><h3>画幅合同</h3><p>默认竖版 3:4；用户明确写横版、4:3、宽屏或 banner 时切换。</p></div>
+    </div>
+    <div class="callout teal"><p><b>P1 是路线事实源：</b>手绘图不会自行规划或补景点；发现顺序、强度或交通不合理时，应先回 P1 修改路线，再失效对应的下游画面。</p></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">05</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">04 / STAGE GUIDE</div><h2>P4–P7：把视觉资产变成发布成品</h2><div class="rule"></div></div><div class="head-index">04B</div></div>
+    <div class="stage"><div class="stage-id">P4</div><div class="stage-body"><div><b>输入</b><span>用户明确推广意图、酒店实图、P1 路线与酒店位置语境。</span></div><div><b>处理</b><span>每家 1 张手绘酒店宣传图；外观/公共面为主，房型窗口辅助，路线元素合计低于 25%。</span></div><div><b>通过产物</b><span class="pass">0–N 张酒店图。无素材时标记跳过，不制作占位图。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P5</div><div class="stage-body"><div><b>输入</b><span>城市、天数、完整偏好与 P1 路线主题。</span></div><div><b>处理</b><span>从完整主题中选一个最强海报主线，做“静态画面 + 动态视觉元素”的发布首图。</span></div><div><b>通过产物</b><span class="pass">1 张海报；默认 3:4，同时作为轮播首图与短视频封面源图。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P6</div><div class="stage-body"><div><b>输入</b><span>P1 路线、P2 每日图、P3 美食图、P5 海报与可选 P4 酒店图。</span></div><div><b>处理</b><span>写标题、正文、话题；按“海报→每日图→美食→酒店”连续编号并清理旧托管图片。</span></div><div><b>通过产物</b><span class="pass">小红书推文 + 0..N 连续轮播 + 独立短视频封面。</span></div></div></div>
+    <div class="stage"><div class="stage-id">P7</div><div class="stage-body"><div><b>输入</b><span>P6 编号图片、独立封面、音色/语速/字幕偏好。</span></div><div><b>处理</b><span>每张编号图片写一段口播，生成一段音频，画面时长与音频精确同步；烧录高对比字幕。</span></div><div><b>通过产物</b><span class="pass">口播文案.md + 1080×1440 有声字幕 MP4。</span></div></div></div>
+    <div class="grid3" style="margin-top:11px">
+      <div><h3>酒店不硬插</h3><p>没有酒店成品图时，推文、标签与视频都不提住宿推广。</p></div><div><h3>封面不重复</h3><p>短视频封面与 0 号海报同源，但封面不进入场景序列。</p></div><div><h3>口播不读图</h3><p>讲体验、情绪与路线收益，不机械复述每个可见标签。</p></div>
+    </div>
+    <div class="callout"><p><b>发布顺序合同：</b><code>0_海报图 → 1..D_每日旅行图 → 城市美食手绘图 → 酒店宣传图（可选）</code>。视频严格消费这个顺序。</p></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">06</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">05 / HOW TO USE</div><h2>日常使用：只需说明城市目标与交付范围</h2><div class="rule"></div></div><div class="head-index">05</div></div>
+    <div class="grid2">
+      <div>
+        <ol class="steps"><li><b>准备需求</b>：城市、时长、到离时间、主题、每日强度、餐食与同行限制。</li><li><b>说明交付</b>：是否需要酒店推广、横竖版、推文与短视频。</li><li><b>确认路线</b>：重点看每日节奏、交通预算、住宿区域和天气兜底。</li><li><b>确认海报</b>：确认主标题、主题气质与是否符合发布入口。</li><li><b>查看发布包</b>：重点看编号连续性、图片顺序、口播与视频场景同步。</li><li><b>按责任阶段返工</b>：路线问题回 P1，画面问题回对应视觉阶段，发布问题回 P6/P7。</li></ol>
+        <div class="warning"><b>低强度当天要多说两件事：</b>从上午、下午还是晚上开始；是否安排正餐。混合强度还要说明每种强度对应哪一天。</div>
+      </div>
+      <div>
+        <h3>完整生产示例</h3>
+        <div class="prompt">制作一套广州 3 天 2 晚旅游内容。Day 1 上午 10 点到，Day 3 晚上 8 点后返程；偏好白云山日出、广府早茶和高空刺激，3 天均正常强度。需要每日手绘路线图、城市美食图鉴与新版旅行海报；如果本地有广州酒店实图，选 2 家做路线适配宣传。最后生成小红书图文发布包和带字幕口播短视频。</div>
+        <p class="tiny">内部会自动完成 P0–P7；不需要使用者逐个点名底层 Skill。</p>
+      </div>
+    </div>
+    <h3 style="margin-top:12px">恢复与返工也用同一个入口</h3>
+    <div class="grid3">
+      <div class="handoff"><h4>恢复未完成案例</h4><p>“检查广州-3天2晚-登山日出早茶刺激，从最早未通过的阶段继续；复用已经合格的成品。”</p></div>
+      <div class="handoff"><h4>只返工某天路线图</h4><p>“第二天地图的 2→3 箭头反了。保留路线与其他天成品，只重做第二天地图及受影响的发布包和视频。”</p></div>
+      <div class="handoff"><h4>切换为无酒店版</h4><p>“本次不做酒店推广，保留路线、美食与海报，重新打包推文和视频，删除旧酒店编号图。”</p></div>
+    </div>
+    <div class="callout teal"><p><b>推荐习惯：</b>先确认 P1 路线和 P5 海报，再授权连续完成到 P7。这样既保留两次关键判断，又不用手工管理中间文件。</p></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">07</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">06 / FILE HANDOFF</div><h2>每一份文件，都是明确交接物</h2><div class="rule"></div></div><div class="head-index">06</div></div>
+    <p class="lead">最终目录只放可交付成品。提示词、候选图、下载缓存、临时音频、分段视频和运行轨迹不进入项目，恢复生产时不会把旧稿误当成当前版本。</p>
+    <div class="grid2" style="grid-template-columns:1.15fr .85fr">
+      <div class="folder">output/
+├─ 游玩路线/{城市}/{case}/
+│  ├─ {路线规划}.md                         P1
+│  └─ {城市}-day-01...png                   P2
+├─ 美食手绘图/{城市}/{case}/
+│  ├─ 01_{城市}-handdrawn-food-guide...png  P3
+│  └─ 02_...png                             P3（可选）
+├─ 酒店推广/{城市}/{case}/                  P4（条件分支）
+│  └─ {酒店}-handdrawn-hotel-promo...png
+├─ 宣传海报/{城市}/{case}/
+│  └─ {城市}-{主题}-motion-still...png       P5
+└─ 发布/{城市}/{case}/
+   ├─ 0_海报图.png
+   ├─ 1_第一天旅行图.png
+   ├─ ...连续编号发布图片                    P6
+   ├─ 短视频封面.png                         P6
+   ├─ 小红书推文.md                          P6
+   ├─ 口播文案.md                            P7
+   └─ 抖音_视频号短视频.mp4                  P7</div>
+      <div class="handoff">
+        <div class="row"><b>路线事实源</b><span>P1 Markdown 决定每天画什么、按什么顺序画。</span></div>
+        <div class="row"><b>视觉成品</b><span>P2–P5 只保存验收通过的最终图片。</span></div>
+        <div class="row"><b>发布事实源</b><span>P6 连续编号图片决定轮播与视频场景顺序。</span></div>
+        <div class="row"><b>独立封面</b><span>短视频封面不带数字前缀，不计入场景数。</span></div>
+        <div class="row"><b>可恢复机制</b><span>从最早缺失/未通过阶段继续，复用合格上游。</span></div>
+        <div class="row"><b>敏感边界</b><span>密钥、隐藏提示词与本机私有配置不进入交付。</span></div>
+      </div>
+    </div>
+    <div class="grid4" style="margin-top:11px"><div><h3>不存草稿</h3><p>候选图片只留在生成缓存。</p></div><div><h3>不存轨迹</h3><p>不创建执行记录或隐藏推理文件。</p></div><div><h3>不混旧图</h3><p>重打包先清理托管编号图与旧封面。</p></div><div><h3>不改用户文件</h3><p>非托管 Markdown、MP4 与用户资产保留。</p></div></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">08</div>
+  </section>
+
+  <section class="page" id="real-output">
+    <div class="head"><div><div class="eyebrow">07 / REAL OUTPUT</div><h2>广州实测：从路线规划跑到发布视频</h2><div class="rule"></div></div><div class="head-index">07</div></div>
+    <div class="metricbar"><div class="metric"><b>3</b><span>天正常强度路线</span></div><div class="metric"><b>3</b><span>每日手绘路线图</span></div><div class="metric"><b>3</b><span>酒店路线适配图</span></div><div class="metric"><b>1</b><span>图文包与有声短视频</span></div></div>
+    <div class="real-grid">
+      <figure class="shot real-main"><img loading="lazy" decoding="async" class="art" src="旅图种草引擎_旅游内容全流程与效果说明_assets/002.jpg" alt="广州第一天手绘路线图"><figcaption>Day 1｜老城早茶、西关漫游与北京路夜色被压缩进一张有序地图</figcaption></figure>
+      <div class="real-side">
+        <figure class="shot"><img loading="lazy" decoding="async" class="art" src="旅图种草引擎_旅游内容全流程与效果说明_assets/003.jpg" alt="广州旅行海报"><figcaption>海报｜以日出、早茶与城市高空感建立点击主题</figcaption></figure>
+        <figure class="shot"><img loading="lazy" decoding="async" class="art" src="旅图种草引擎_旅游内容全流程与效果说明_assets/004.jpg" alt="广州酒店宣传图"><figcaption>酒店｜空间实图、外观与路线适配形成软种草</figcaption></figure>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:9px">
+      <div class="quote">第一天先进入老城烟火，第二天留给白云山日出和高空城市感，第三天用早茶和长隆把旅行记忆点收住。</div>
+      <div class="callout teal"><p><b>如何理解这个案例：</b>它展示了路线、每日地图、酒店、海报、推文与视频的完整衔接。现行流程在此基础上新增城市美食图鉴阶段，并将美食图放在每日地图之后、酒店图之前。</p></div>
+    </div>
+    <div class="source">示例来自项目现有广州-3天2晚-登山日出早茶刺激案例；具体文字、尺寸与资产数量以对应生成批次为准。</div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">09</div>
+  </section>
+
+  <section class="page" id="output-effect">
+    <div class="head"><div><div class="eyebrow">08 / OUTPUT EFFECT</div><h2>发布效果：同一主题在图、文、声中保持一致</h2><div class="rule"></div></div><div class="head-index">08</div></div>
+    <div class="grid2" style="grid-template-columns:.92fr 1.08fr">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;height:410px">
+        <figure class="shot" style="height:410px"><img loading="lazy" decoding="async" class="art" style="object-position:top" src="旅图种草引擎_旅游内容全流程与效果说明_assets/005.jpg" alt="新版苏州旅行海报"><figcaption>新版海报：完整主题画面，不使用旧版圆窗拼贴</figcaption></figure>
+        <figure class="shot" style="height:410px"><img loading="lazy" decoding="async" class="art" src="旅图种草引擎_旅游内容全流程与效果说明_assets/006.jpg" alt="广州第二天手绘路线图"><figcaption>每日地图：顺序、地标与路线方向同时可见</figcaption></figure>
+      </div>
+      <div>
+        <h3>图文效果</h3>
+        <div class="quote">路线不是把景点硬塞满，而是按节奏拆开：第一天进入老城烟火，第二天留给山顶日出和城市高空，第三天用早茶与刺激项目收住记忆点。</div>
+        <h3 style="margin-top:10px">口播效果</h3>
+        <div class="prompt">广州三天两晚 / 带给你的不只是 / 山顶日出的清醒 / 还有早茶蒸汽里 / 慢慢醒来的羊城烟火
+
+第二天最值得的 / 是早起那一下 / 白云山的风 / 会把人吹清醒 / 如果刚好碰上日出 / 整座城市像是 / 从雾里慢慢打开</div>
+        <div class="grid3" style="margin-top:9px"><div><h3>首图</h3><p>先卖城市与主题情绪。</p></div><div><h3>正文</h3><p>解释为什么这样走更顺。</p></div><div><h3>视频</h3><p>逐图讲体验，不照读标签。</p></div></div>
+        <div class="callout"><p><b>固定成片规格：</b>1080×1440；横版路线图完整缩放显示，背景用同图模糊暗化补满；字幕按语义切成短节拍并烧录进视频。</p></div>
+      </div>
+    </div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">10</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">09 / QUALITY & REWORK</div><h2>问题出现在哪里，就回到哪里</h2><div class="rule"></div></div><div class="head-index">09</div></div>
+    <table class="qa"><thead><tr><th>阶段</th><th>必须回答的问题</th><th>不通过时回流</th></tr></thead><tbody>
+      <tr><td><b>P1 路线</b></td><td>时间窗、交通、强度、餐食、休息与返程是否构成完整日链？</td><td>改 P1；对应的 P2–P7 下游按影响范围失效。</td></tr>
+      <tr><td><b>P2 每日地图</b></td><td>标题、N 个点位、N−1 段相邻箭头、地标和标签是否正确？</td><td>只重做受影响日期，并重打包/重合成相关下游。</td></tr>
+      <tr><td><b>P3 美食图</b></td><td>每页 5–7 种；外观可辨；食物是否占视觉主导？</td><td>重选/重画该页，不改已经确认的路线。</td></tr>
+      <tr><td><b>P4 酒店图</b></td><td>是否有实图依据；酒店主体是否清晰；有无虚构设施与重复源图？</td><td>重做该酒店或跳过酒店分支。</td></tr>
+      <tr><td><b>P5 海报</b></td><td>是否只有一个最强主题；标题清楚；无价格、二维码和促销卡片？</td><td>重做海报，并替换 P6 首图/封面与 P7 开场。</td></tr>
+      <tr><td><b>P6 发布包</b></td><td>编号是否从 0 连续到最后一张；顺序是否为海报→每日图→美食→酒店？</td><td>清理旧托管图后重新打包。</td></tr>
+      <tr><td><b>P7 视频</b></td><td>是否 1080×1440、有音频流、烧录字幕，场景数等于编号图片数？</td><td>按逐图口播和音频时长重新合成。</td></tr>
+    </tbody></table>
+    <h3 style="margin-top:10px">最小失效范围</h3>
+    <div class="routeback"><div class="back"><b>路线变了</b><p>该日地图、发布包、口播与视频需要更新。</p></div><div class="back"><b>只有箭头错</b><p>只重做该日图，再更新包含它的发布包与视频。</p></div><div class="back"><b>酒店撤下</b><p>删除酒店图与酒店文案，重排编号并重合成。</p></div><div class="back"><b>字幕不好看</b><p>保留路线、图片与口播，只返工 P7 字幕与成片。</p></div></div>
+    <div class="callout teal"><p><b>验收铁律：</b>图像比例错误不靠拉伸、补边或硬裁切修复；文字/箭头错误不靠粗糙后贴图掩盖；应回到负责该画面的阶段重新生成或编辑。</p></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">11</div>
+  </section>
+
+  <section class="page">
+    <div class="head"><div><div class="eyebrow">10 / BOUNDARIES & BASIS</div><h2>适用边界与内部实现说明</h2><div class="rule"></div></div><div class="head-index">10</div></div>
+    <div class="grid2">
+      <div><h3>这套流程擅长</h3><ul class="checks"><li>从城市、时长和偏好快速生成可执行路线。</li><li>把多日路线转成风格统一的手绘视觉。</li><li>把美食与酒店自然嵌入路线种草，而不是独立硬广。</li><li>让海报、轮播、推文、口播和视频共享同一主题。</li><li>按阶段恢复、最小范围返工与重新打包。</li></ul></div>
+      <div><h3>这套流程不会做</h3><ul class="checks"><li>不会用热门景点清单替代交通与体力计算。</li><li>不会把未核实内容写成“官方推荐、最好、第一”。</li><li>不会凭空生成酒店价格、库存、设施和亲历体验。</li><li>不会把手绘路线图冒充 GPS 导航或精确地图。</li><li>不会把提示词、密钥、草稿和运行轨迹放进成品目录。</li></ul></div>
+    </div>
+    <h3 style="margin-top:10px">内部执行模块（属于同一工作流，不是产品层的独立工具）</h3>
+    <table class="impl"><thead><tr><th>流程阶段</th><th>内部实现模块</th><th>在整体流程中的责任</th></tr></thead><tbody>
+      <tr><td>P0–P7 总控</td><td><code>generate-xiaohongshu-travel-hotel-seeding</code></td><td>统一案例、阶段顺序、跳过条件、交接与最终汇报。</td></tr>
+      <tr><td>P1</td><td><code>plan-travel-route</code></td><td>路线事实源。</td></tr>
+      <tr><td>P2–P5</td><td><code>handdrawn-map / city-food / hotel-promo / travel-poster</code></td><td>生产并验收四类视觉资产。</td></tr>
+      <tr><td>P6–P7</td><td><code>xiaohongshu-travel-post / video-voiceover</code></td><td>连续编号发布包、推文、口播、字幕与成片。</td></tr>
+    </tbody></table>
+    <div class="grid3" style="margin-top:10px"><div><h3>本说明依据</h3><p>当前项目全流程总控规范与各阶段生产合同。</p></div><div><h3>效果依据</h3><p>广州、苏州现有路线、海报、酒店图、推文与短视频案例。</p></div><div><h3>使用判断</h3><p>以当前规范为准；历史图片只用于说明演进，不覆盖现行流程。</p></div></div>
+    <div class="callout"><p><b>一句话总结：</b>一份城市需求，经 P0–P7 连续编译，最终成为“路线文档 + 每日地图 + 美食/酒店视觉 + 海报 + 图文发布包 + 配音短视频”的完整内容资产。</p></div>
+    <div class="cover-foot" style="bottom:17mm"><span>旅图种草引擎 · 旅游内容全流程与效果说明</span><span>END</span></div>
+    <div class="run">TRAVEL CONTENT PIPELINE</div><div class="num">12</div>
+  </section>
+
+</main></body></html>

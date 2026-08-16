@@ -1,3 +1,336 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:87849398839e9e4e3bd7c297636831bd8ad4632f3fba5b2a296207e8b73e855f
-size 813158
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="《重生修仙：我为大圣寻心魂》AI漫画生成流程、使用方法与实际效果说明。">
+  <title>重生修仙｜AI漫画生成全流程与效果说明</title>
+  <style>
+    :root{
+      --ink:#eef5ff;--muted:#a8b4ca;--dim:#72819c;--bg:#070b13;--panel:#0e1523;
+      --panel2:#121d2f;--line:rgba(169,197,235,.16);--ice:#9ddcff;--blue:#5da8ff;
+      --violet:#9d86ff;--gold:#d8b06a;--good:#70d6b1;--review:#e7bd6c;--danger:#ee8f9b;
+      --shadow:0 28px 80px rgba(0,0,0,.36);--radius:20px;--serif:"STSong","SimSun",serif;
+      --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:
+      radial-gradient(circle at 76% 3%,rgba(73,111,186,.20),transparent 28rem),
+      radial-gradient(circle at 8% 19%,rgba(88,59,140,.16),transparent 26rem),var(--bg);
+      color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.82;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}img{max-width:100%;display:block}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(18px);background:rgba(7,11,19,.82);border-bottom:1px solid var(--line)}
+    .topbar .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{font-weight:800;letter-spacing:.06em;white-space:nowrap}
+    .brand i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px;background:var(--gold);box-shadow:0 0 20px var(--gold)}
+    nav{display:flex;gap:22px;overflow:auto;scrollbar-width:none;color:var(--muted);font-size:13px;white-space:nowrap}nav a:hover{color:var(--ice)}
+    .hero{min-height:820px;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:70px;padding:72px 0 88px;position:relative}
+    .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:800}.hero h1{font-family:var(--serif);font-size:clamp(46px,6vw,82px);line-height:1.06;margin:18px 0 24px;letter-spacing:-.04em;font-weight:900}
+    .hero h1 span{display:block;color:var(--ice);text-shadow:0 0 34px rgba(116,194,255,.25)}.lead{font-size:20px;color:#cbd6e8;max-width:720px;margin:0 0 32px}
+    .hero-pills{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid var(--line);background:rgba(255,255,255,.035);padding:8px 13px;border-radius:999px;color:var(--muted);font-size:13px}
+    .hero-art{position:relative;justify-self:end;width:min(440px,100%)}.hero-art:before{content:"";position:absolute;inset:-22px;border:1px solid rgba(157,220,255,.22);border-radius:28px;transform:rotate(2deg)}
+    .hero-art img{border-radius:18px;box-shadow:var(--shadow);aspect-ratio:3/4;object-fit:cover}.hero-badge{position:absolute;left:-48px;bottom:36px;background:rgba(10,18,31,.94);border:1px solid rgba(216,176,106,.42);padding:14px 18px;border-radius:12px;box-shadow:var(--shadow)}
+    .hero-badge strong{display:block;color:var(--gold);font-size:28px;line-height:1}.hero-badge small{color:var(--muted)}
+    section{padding:92px 0;border-top:1px solid var(--line);scroll-margin-top:70px}.section-kicker{font-size:12px;color:var(--gold);font-weight:800;letter-spacing:.2em}.section-head{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:start;margin-bottom:46px}
+    h2{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1.16;margin:10px 0 0}h3{font-size:21px;line-height:1.35;margin:0 0 10px}.section-intro{font-size:18px;color:#c4d0e1;margin:10px 0 0}
+    .statline{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.025)}
+    .stat{padding:28px 22px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat strong{display:block;font-size:34px;line-height:1;color:var(--ice);margin-bottom:8px}.stat span{font-size:13px;color:var(--muted)}
+    .callout{margin-top:26px;border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(216,176,106,.11),rgba(216,176,106,.025));padding:18px 22px;color:#d7dfec}.callout strong{color:#f3d79e}
+    .architecture{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.arch{padding:28px;border-top:2px solid var(--blue);background:linear-gradient(180deg,rgba(83,137,211,.10),rgba(255,255,255,.025));min-height:220px}.arch:nth-child(2){border-color:var(--violet)}.arch:nth-child(3){border-color:var(--gold)}
+    .arch .n{font-family:var(--serif);font-size:46px;line-height:1;color:rgba(255,255,255,.14)}.arch p{color:var(--muted);margin:12px 0 0}.arch code{font:12px Consolas,monospace;color:var(--ice)}
+    .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.gate{position:relative;padding:22px 18px 20px;background:var(--panel);border:1px solid var(--line);min-height:176px;border-radius:14px}.gate:after{content:"→";position:absolute;right:-12px;top:45%;color:var(--gold);z-index:2}.gate:nth-child(5n):after,.gate:last-child:after{display:none}
+    .gate b{display:flex;align-items:center;justify-content:space-between;font-size:12px;letter-spacing:.1em;color:var(--gold)}.gate strong{display:block;font-size:18px;margin:12px 0 8px}.gate p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+    .gate .dot{width:8px;height:8px;background:var(--good);border-radius:50%;box-shadow:0 0 12px var(--good)}
+    .stage-list{border-top:1px solid var(--line)}.stage-row{display:grid;grid-template-columns:118px 1fr 1fr 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}.stage-id{font-family:var(--serif);font-size:40px;line-height:1;color:var(--ice)}
+    .stage-row p{margin:0;color:var(--muted);font-size:14px}.stage-row ul{padding-left:18px;margin:0;color:var(--muted);font-size:14px}.stage-row li+li{margin-top:5px}.stage-label{font-size:11px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+    .checkpoint{background:linear-gradient(130deg,rgba(68,119,185,.14),rgba(137,92,184,.08));border:1px solid rgba(130,176,232,.24);border-radius:20px;padding:30px;margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:28px}.checkpoint strong{color:var(--ice)}
+    .use-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px}.steps{counter-reset:item}.step{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}.step:before{counter-increment:item;content:counter(item,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(216,176,106,.45);border-radius:50%;font-weight:800;color:var(--gold)}.step p{color:var(--muted);margin:4px 0 0;font-size:14px}
+    .prompt-stack{display:grid;gap:16px}.prompt{background:#0a101b;border:1px solid var(--line);border-radius:14px;overflow:hidden}.prompt-head{display:flex;justify-content:space-between;padding:11px 15px;background:rgba(255,255,255,.035);font-size:12px;color:var(--muted)}
+    pre{white-space:pre-wrap;word-break:break-word;margin:0;padding:18px 20px;color:#dfe9f7;font:13px/1.75 Consolas,"Microsoft YaHei",monospace}.copy{border:0;background:none;color:var(--ice);cursor:pointer}.copy.done{color:var(--good)}
+    .file-map{display:grid;grid-template-columns:1.2fr .8fr;gap:32px}.tree{background:#080d16;border:1px solid var(--line);border-radius:16px;padding:26px;overflow:auto;color:#ced9ea;font:13px/1.8 Consolas,"Microsoft YaHei",monospace}.legend{display:grid;gap:12px}.legend div{border-left:2px solid var(--blue);padding:8px 0 8px 16px}.legend b{display:block}.legend span{color:var(--muted);font-size:13px}
+    .results{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:start}.scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score{padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:14px}.score strong{display:block;font-size:30px;color:var(--ice)}.score span{font-size:13px;color:var(--muted)}
+    .bar{height:10px;background:#1b2638;border-radius:999px;overflow:hidden;margin:18px 0 8px}.bar i{display:block;height:100%;width:31.25%;background:var(--good);float:left}.bar i.review{width:68.75%;background:var(--review)}.bar-note{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+    .truth-note{margin-top:22px;padding:20px;border:1px solid rgba(231,189,108,.28);background:rgba(231,189,108,.055);border-radius:14px;font-size:14px;color:#d6deea}.truth-note b{color:var(--review)}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}.shot{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}.shot img{width:100%;aspect-ratio:3/4;object-fit:cover}.shot.tall img{aspect-ratio:9/16}.shot figcaption{padding:16px 17px;color:var(--muted);font-size:13px}.shot b{display:block;color:var(--ink);margin-bottom:3px}
+    table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:15px 14px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--gold);font-size:12px;letter-spacing:.08em}td{color:#c4cede}td:first-child{color:var(--ink);font-weight:700;white-space:nowrap}.tag{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;border:1px solid currentColor}.good{color:var(--good)}.review{color:var(--review)}.danger{color:var(--danger)}
+    .returns{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.return{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:18px;background:rgba(255,255,255,.022);border:1px solid var(--line);border-radius:14px}.return b{color:var(--ice);font-size:20px}.return p{margin:0;color:var(--muted);font-size:13px}
+    .boundaries{display:grid;grid-template-columns:1fr 1fr;gap:32px}.boundary{padding:28px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.022)}.boundary h3{color:var(--ice)}.boundary ul{margin:12px 0 0;padding-left:20px;color:var(--muted)}
+    .sources{columns:2;column-gap:42px}.source{break-inside:avoid;padding:14px 0;border-bottom:1px solid var(--line)}.source b{display:block;font-size:14px}.source span{font-size:12px;color:var(--muted)}
+    footer{padding:44px 0 64px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}.foot{display:flex;justify-content:space-between;gap:24px;align-items:flex-end}.foot strong{font-family:var(--serif);font-size:23px;color:#cdd8e7}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:52px}.hero-art{justify-self:start;width:min(420px,86%)}.hero-badge{left:auto;right:-26px}.section-head,.use-grid,.file-map,.results{grid-template-columns:1fr;gap:28px}.statline{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.pipeline{grid-template-columns:repeat(2,1fr)}.gate:nth-child(5n):after{display:block}.gate:nth-child(2n):after{display:none}.stage-row{grid-template-columns:80px 1fr}.stage-row>div:nth-child(3),.stage-row>div:nth-child(4){grid-column:2}.architecture,.gallery{grid-template-columns:1fr}.shot,.shot.tall{max-width:520px}.checkpoint,.boundaries{grid-template-columns:1fr}.sources{columns:1}}
+    @media(max-width:560px){.wrap{width:min(100% - 26px,1180px)}nav{display:none}.hero h1{font-size:43px}.hero{min-height:auto}.hero-art:before{inset:-8px}.hero-badge{position:static;margin-top:12px}.statline,.scoreboard,.returns{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}.pipeline{grid-template-columns:1fr}.gate:after{display:none!important}.stage-row{grid-template-columns:1fr}.stage-row>div:nth-child(3),.stage-row>div:nth-child(4){grid-column:1}.stage-id{font-size:32px}.sources{columns:1}}
+    @media print{@page{size:A4;margin:14mm}body{background:#fff;color:#17202d;font-size:10pt}.topbar{display:none}.wrap{width:100%}.hero{min-height:auto;padding:0 0 18mm;page-break-after:always}.hero h1 span,.stage-id,.score strong{color:#245c7c;text-shadow:none}.lead,.section-intro,.stage-row p,.stage-row ul,.step p,.legend span,.score span,.truth-note,.shot figcaption,td,.boundary ul,.source span{color:#4b5667}.hero-art:before{display:none}.hero-art img,.shot{box-shadow:none}.hero-badge{background:#fff;color:#17202d}section{padding:12mm 0;border-color:#d9dee6;break-before:page}.section-head{margin-bottom:8mm}.statline,.gate,.prompt,.tree,.score,.shot,.boundary,.return,.arch,.checkpoint{background:#fff;border-color:#ccd4de}.gate:after{color:#9a6c23}.gate p{color:#4b5667}pre{color:#17202d}.copy{display:none}.gallery{grid-template-columns:repeat(3,1fr)}a{color:#17202d}}
+  </style>
+</head>
+<body>
+  <style id="team-return-style">
+    .team-return-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 15px;
+      color: #fff !important;
+      background: rgba(11, 13, 17, .96);
+      border: 1px solid rgba(255, 255, 255, .58);
+      outline: 4px solid rgba(11, 13, 17, .78);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .24);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 800;
+      text-decoration: none !important;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .team-return-button:hover {
+      color: #fff !important;
+      background: #155eef;
+      border-color: #8eb2ff;
+      transform: translateY(-1px);
+    }
+    .team-return-button:focus-visible {
+      outline: 4px solid rgba(21, 94, 239, .32);
+      outline-offset: 3px;
+    }
+    @media (max-width: 560px) {
+      .team-return-button { top: 12px; left: 12px; min-height: 38px; padding: 0 12px; font-size: 12px; }
+    }
+    @media print {
+      .team-return-button { display: none !important; }
+    }
+  </style>
+  <a class="team-return-button" href="../../AI企业落地团队介绍.html?product=comic#product-gallery" aria-label="返回AI企业落地团队介绍">← 返回团队介绍</a>
+  <script id="team-return-script">
+    (function () {
+      const button = document.querySelector(".team-return-button");
+      if (!button) return;
+      button.addEventListener("click", function (event) {
+        const params = new URLSearchParams(location.search);
+        const returnTarget = params.get("return");
+        if (!returnTarget) {
+          if (params.get("from") === "team" && history.length > 1) {
+            event.preventDefault();
+            history.back();
+          }
+          return;
+        }
+        try {
+          const returnUrl = new URL(returnTarget, location.href);
+          if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
+          event.preventDefault();
+          location.href = returnUrl.href;
+        } catch (error) {
+          // Invalid return targets fall back to this product's carousel entry.
+        }
+      });
+    })();
+  </script>
+  <header class="topbar">
+    <div class="wrap"><div class="brand"><i></i>AI COMIC PIPELINE</div><nav aria-label="章节导航"><a href="#overview">总览</a><a href="#pipeline">流程</a><a href="#stages">阶段</a><a href="#use">使用</a><a href="#result">效果</a><a href="#qa">验收</a><a href="#sources">依据</a></nav></div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">WORKFLOW · MANUAL · CASE STUDY</div>
+        <h1>AI漫画生成<span>全流程与效果说明</span></h1>
+        <p class="lead">以《重生修仙：我为大圣寻心魂》为完整样例，说明一话漫画如何从锁定剧情，经过脚本、文字、分镜、视觉资产、提示词与生图验收，最终成为可发布的16张竖版成图。</p>
+        <div class="hero-pills"><span class="pill">正史驱动</span><span class="pill">G0–G9 阶段门</span><span class="pill">15页长竖版正文</span><span class="pill">独白核心叙事</span><span class="pill">可恢复 · 可返工 · 可追溯</span></div>
+      </div>
+      <figure class="hero-art"><img loading="eager" decoding="async" fetchpriority="high" src="重生修仙_AI漫画生成全流程与效果说明_assets/001.jpg" alt="第一话《七日死局》正式封面"><figcaption class="hero-badge"><strong>16</strong><small>每话固定成图</small></figcaption></figure>
+    </div>
+
+    <section id="overview"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">01 / PRODUCT OVERVIEW</div><h2>从“写提示词出图”，<br>升级为可审计生产线</h2></div><p class="section-intro">这套流程把最容易漂移的内容拆成独立权威层：剧情只认正史，最终可见文字只认文字锁，页面结构只认故事板，生图只消费通过预检的逐图提示词。任何问题都回到最早责任阶段处理。</p></div>
+      <div class="statline"><div class="stat"><strong>1</strong><span>唯一剧情事实源</span></div><div class="stat"><strong>10</strong><span>G0–G9 阶段门</span></div><div class="stat"><strong>3×5</strong><span>三个五页叙事段</span></div><div class="stat"><strong>15</strong><span>正文竖版页面</span></div><div class="stat"><strong>16</strong><span>封面 + 正文位图</span></div></div>
+      <div class="callout"><strong>核心价值：</strong>前期把剧情、文字、二维页面拓扑和视觉版本锁清楚，生图阶段只执行，不再临时补剧情、改台词或重做分镜；既降低内容漂移，也让局部返工不必推倒整话。</div>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">02 / SYSTEM ARCHITECTURE</div><h2>三层权威，各管一件事</h2></div><p class="section-intro">“谁有权改什么”比工具数量更重要。流程通过权威文件与哈希，把创作判断、生产执行和发布状态彼此隔离。</p></div>
+      <div class="architecture">
+        <article class="arch"><div class="n">01</div><h3>正史层</h3><p>人物、世界、事件、知识边界与状态变化只保存在 Story Skills。漫画资料是派生产物，不能反过来发明事实。</p><code>story/ → final canon</code></article>
+        <article class="arch"><div class="n">02</div><h3>生产层</h3><p>脚本、文字锁、分镜、视觉就绪和提示词包逐级编译。每个阶段只处理自己的职责，并保留来源和依赖哈希。</p><code>G0 → G7</code></article>
+        <article class="arch"><div class="n">03</div><h3>发布层</h3><p>生图后逐页记录状态，整话再做发布门。技术失败与非技术偏差分流，避免系统擅自重生或偷偷修图。</p><code>G8 → G9</code></article>
+      </div>
+    </div></section>
+
+    <section id="pipeline"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">03 / END-TO-END FLOW</div><h2>从定稿故事到发布成图</h2></div><p class="section-intro">每一格都有上游依据，每一条字都有唯一 ID，每一张图都有生成报告。下游发现问题时，不“顺手改”，而是按责任回流。</p></div>
+      <div class="pipeline">
+        <article class="gate"><b>G0 <i class="dot"></i></b><strong>准入</strong><p>确认来源已定稿、单话职责与知识边界成立。</p></article>
+        <article class="gate"><b>G1 <i class="dot"></i></b><strong>完整漫画脚本</strong><p>同时完成外部行动、内部体验与全部文字初稿。</p></article>
+        <article class="gate"><b>G2 <i class="dot"></i></b><strong>正史回写</strong><p>只有新增或改变事实时执行；否则记为无需。</p></article>
+        <article class="gate"><b>G3 <i class="dot"></i></b><strong>来源冻结</strong><p>锁定最终事件、状态、范围、路径与哈希。</p></article>
+        <article class="gate"><b>G4 <i class="dot"></i></b><strong>文字锁</strong><p>锁定全部可见文字，不提前分配最终页码。</p></article>
+        <article class="gate"><b>G5 <i class="dot"></i></b><strong>二维分镜</strong><p>分配P01–P15、真实画格、阅读路径与文字挂载。</p></article>
+        <article class="gate"><b>G6 <i class="dot"></i></b><strong>视觉就绪</strong><p>核对文字视觉、角色、服装、地点、道具与参考版本。</p></article>
+        <article class="gate"><b>G7 <i class="dot"></i></b><strong>提示词编译</strong><p>生成16份最终提示词与可验证提示词包。</p></article>
+        <article class="gate"><b>G8 <i class="dot"></i></b><strong>生成与筛查</strong><p>逐图生成，记录可用、待复核、阻塞或技术失败。</p></article>
+        <article class="gate"><b>G9 <i class="dot"></i></b><strong>发布门</strong><p>确认16图齐全、无阻塞，组装PDF并登记索引。</p></article>
+      </div>
+    </div></section>
+
+    <section id="stages"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">04 / STAGE GUIDE</div><h2>每个阶段做什么，<br>怎样才算通过</h2></div><p class="section-intro">下面按真实交接关系说明输入、动作与结果。这里的“通过”，指文件已经能够被下一阶段安全消费。</p></div>
+      <div class="stage-list">
+        <div class="stage-row"><div class="stage-id">G0</div><div><div class="stage-label">输入</div><p>已达 final 的章节/场景、全局刺激登记、项目配置与连续性状态。</p></div><div><div class="stage-label">处理</div><p>确认本话来源、剧情职责、知识边界、生产模式；不写具体剧情，不分配页码。</p></div><div><div class="stage-label">通过产物</div><p><b>episode-brief.md</b>：事实范围、刺激适配与准入结论明确。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G1</div><div><div class="stage-label">输入</div><p>G0简报与正史来源。</p></div><div><div class="stage-label">处理</div><p>写完整可连续阅读的漫画脚本：目标、冲突、选择、结果、外部行动、内部体验、文字初稿、叙事桥和话尾钩子。</p></div><div><div class="stage-label">通过产物</div><p><b>episode-script.md</b> + <b>content-inventory.yaml</b>；没有“此处独白”“待定”等占位。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G2–3</div><div><div class="stage-label">输入</div><p>用户确认后的G1脚本与正史差异。</p></div><div><div class="stage-label">处理</div><p>有事实变化才回写正史；随后冻结最终来源、状态、依赖与哈希。无变化时G2直接记为 not-required。</p></div><div><div class="stage-label">通过产物</div><p><b>source-lock.md</b> 可复现且不成为第二份正史。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G4</div><div><div class="stage-label">输入</div><p>G1全部文字初稿 + G3来源锁。</p></div><div><div class="stage-label">处理</div><p>编辑口吻、句长、力度与准确性；为对白、独白、旁白、系统与功能文字分配唯一 text_id。</p></div><div><div class="stage-label">通过产物</div><p><b>text-lock.md</b> / <b>cover-lock.md</b>；准确文字、来源、知情边界与画文关系全锁定。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G5</div><div><div class="stage-label">输入</div><p>完整脚本、内容清单、来源锁、文字锁、项目页序列。</p></div><div><div class="stage-label">处理</div><p>把节拍分配到P01–P15，设计非对称二维页面、真实画格、视觉区、阅读路径、转场与text_id挂载。</p></div><div><div class="stage-label">通过产物</div><p><b>storyboard.md</b> + <b>storyboard-audit.json</b>；内容覆盖、拓扑与叙事桥全部通过。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G6</div><div><div class="stage-label">输入</div><p>G5页面蓝图、视觉指南与共享视觉版本。</p></div><div><div class="stage-label">处理</div><p>确定文字框、字形、层级、负空间、移动端可读性；确认角色/服装/地点/道具和参考图版本。</p></div><div><div class="stage-label">通过产物</div><p><b>visual-readiness.md</b>；所有生图依赖均存在且版本有效。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G7</div><div><div class="stage-label">输入</div><p>G5故事板 + G4准确文字 + G6视觉资产 + 项目视觉规则。</p></div><div><div class="stage-label">处理</div><p>逐图编译自然语言提示词，计算依赖SHA-256，隔离生产ID，运行共享验证器与项目整链预检。</p></div><div><div class="stage-label">通过产物</div><p><b>compiled/</b> 16份提示词 + <b>prompt-package.json</b>；0错误后才允许生图。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G8</div><div><div class="stage-label">输入</div><p>通过预检的16份提示词与参考资产。</p></div><div><div class="stage-label">处理</div><p>按封面、P01–P15顺序生成；逐页筛查剧情节点、人物、关键文字、顺序、视觉效果和分镜落地。</p></div><div><div class="stage-label">通过产物</div><p><b>images/</b> + <b>generation-report.json</b>；非技术偏差只记录，不擅自重做。</p></div></div>
+        <div class="stage-row"><div class="stage-id">G9</div><div><div class="stage-label">输入</div><p>16张成图、G8逐图状态与跨话连续性资料。</p></div><div><div class="stage-label">处理</div><p>确认无未解决阻塞；按输出顺序组装漫画PDF，验证页数与抽样渲染，更新单话清单和全书索引。</p></div><div><div class="stage-label">通过产物</div><p><b>production-manifest.json</b> + 漫画索引 + 16页PDF（项目要求时）。</p></div></div>
+      </div>
+      <div class="checkpoint"><div><strong>检查点 1｜G1 后</strong><br>确认实际剧情、人物目标/冲突/变化、内部体验、文字方向和话尾钩子。</div><div><strong>检查点 2｜G4 后</strong><br>确认全部准确文字、人物声音、文字节奏及画面与文字的关系。</div></div>
+    </div></section>
+
+    <section id="use"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">05 / HOW TO USE</div><h2>日常使用：只需说明话数与目标</h2></div><p class="section-intro">系统会先读取项目配置和生产索引，再从最早未通过门槛继续。你不需要手动告诉它每个文件该放哪里，但需要明确是“新制、恢复、审查”还是“指定返工”。</p></div>
+      <div class="use-grid">
+        <div class="steps">
+          <div class="step"><div><h3>准备定稿来源</h3><p>确保目标话对应章节和场景达到 final；若未定稿，先完成小说侧策划与确认。</p></div></div>
+          <div class="step"><div><h3>提出生产目标</h3><p>告诉系统话数、是否全流程、是否允许自动继续到G8/G9，以及你最关心的效果。</p></div></div>
+          <div class="step"><div><h3>在语义检查点确认</h3><p>默认在G1与G4确认；若希望自动继续，应明确授权，但正史变更仍需先确认。</p></div></div>
+          <div class="step"><div><h3>查看生成报告</h3><p>重点看 usable、user-review、production-blocker、technical-failure 四类状态及逐页备注。</p></div></div>
+          <div class="step"><div><h3>按责任阶段返工</h3><p>只改受影响页面和必要转场；不让一个局部问题无条件拖垮整话。</p></div></div>
+        </div>
+        <div class="prompt-stack">
+          <div class="prompt"><div class="prompt-head"><span>新制作一话</span><button class="copy">复制</button></div><pre>按本项目漫画生产流程制作第002话。先检查正史是否满足G0；若满足，从G0开始推进到G7预检。G1和G4给我确认，未确认前不要生图。</pre></div>
+          <div class="prompt"><div class="prompt-head"><span>恢复未完成生产</span><button class="copy">复制</button></div><pre>检查第002话的 production-manifest 和权威文件，从最早未通过的门槛继续。复用哈希一致的上游产物，报告哪些复用、哪些失效、下一允许阶段是什么。</pre></div>
+          <div class="prompt"><div class="prompt-head"><span>授权连续完成</span><button class="copy">复制</button></div><pre>第002话G1剧情与G4文字确认后，允许继续完成G5–G9。必须先通过两套G7预检；成图非技术偏差只记录为 user-review，不自动重生。</pre></div>
+          <div class="prompt"><div class="prompt-head"><span>指定页面返工</span><button class="copy">复制</button></div><pre>处理第001话P13的视觉备注。先判断问题属于G5、G6、G7还是G8；只失效受影响页面及必要转场，不改未受影响的剧情、文字和页面。</pre></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">06 / FILE HANDOFF</div><h2>每一份文件，都是明确交接物</h2></div><p class="section-intro">正式目录只放权威产物；调试候选与临时分析进入 _work。这样恢复生产时只需读取索引与清单，不会把旧稿、废稿或试验图误当成当前版本。</p></div>
+      <div class="file-map">
+        <pre class="tree">{project_root}/
+├─ story/                         ← 唯一剧情事实源
+└─ comic/
+   ├─ _index.md                   ← 全书漫画进度
+   ├─ shared/
+   │  ├─ adaptation-bible.md      ← 改编原则
+   │  ├─ visual-guide.md          ← 视觉圣经
+   │  ├─ production-continuity.md ← 视觉版本
+   │  └─ characters/individual/   ← active角色参考
+   └─ episodes/episode-NNN/
+      ├─ episode-brief.md          G0
+      ├─ episode-script.md         G1
+      ├─ content-inventory.yaml    G1
+      ├─ source-lock.md            G3
+      ├─ text-lock.md              G4
+      ├─ cover-lock.md             G4
+      ├─ storyboard.md             G5
+      ├─ storyboard-audit.json     G5
+      ├─ visual-readiness.md       G6
+      ├─ prompts/compiled/         G7
+      ├─ prompts/prompt-package.json
+      ├─ images/                   G8
+      ├─ generation-report.json    G8
+      ├─ production-manifest.json  G9
+      └─ NNN.pdf                   G9</pre>
+        <div class="legend"><div><b>人读主稿</b><span>episode-script、storyboard、visual-readiness，便于创作判断与人工复核。</span></div><div><b>机器侧车</b><span>content-inventory、storyboard-audit、prompt-package，用于覆盖检查、映射和哈希验证。</span></div><div><b>唯一状态</b><span>generation-report保存逐图状态；production-manifest只汇总阶段、路径和放行结果。</span></div><div><b>可恢复机制</b><span>先读索引和manifest，定位最早未通过门槛，再读取该阶段必需资料。</span></div></div>
+      </div>
+    </div></section>
+
+    <section id="result"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">07 / REAL OUTPUT</div><h2>第一话实测：完整跑通G0–G9</h2></div><p class="section-intro">样例《七日死局》已完成一封面、十五正文、逐图报告与十六页漫画PDF。这里展示真实生产数据，不把“待用户复核”包装成“完美无误”。</p></div>
+      <div class="results">
+        <div>
+          <div class="scoreboard"><div class="score"><strong>13</strong><span>剧情节拍</span></div><div class="score"><strong>43</strong><span>可追溯内容项</span></div><div class="score"><strong>52</strong><span>锁定正文文字</span></div><div class="score"><strong>4</strong><span>关键叙事桥</span></div><div class="score"><strong>41</strong><span>有效画面/视觉区</span></div><div class="score"><strong>16</strong><span>编译提示词与成图</span></div></div>
+        </div>
+        <div>
+          <h3>生产结果</h3>
+          <p style="color:var(--muted)">16张PNG全部存在且可打开；G7共享验证器与项目整链预检均为0错误；最终无生产阻塞、无技术失败，G9发布门通过。</p>
+          <div class="bar" aria-label="成图状态：5张可用，11张待用户复核"><i></i><i class="review"></i></div>
+          <div class="bar-note"><span><b class="good">5 usable</b></span><span><b class="review">11 user-review</b></span></div>
+          <div class="truth-note"><b>如何理解 user-review：</b>它不是文件损坏或不可发布。第一话的备注主要来自后端比例偏差、个别道具形态、人物动作归属或细节提前显露；流程选择如实记录，并把是否返工留给用户。0个 production-blocker、0个 technical-failure。</div>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot"><img loading="lazy" decoding="async" src="重生修仙_AI漫画生成全流程与效果说明_assets/002.jpg" alt="第一话P01锁魂井场景"><figcaption><b>P01｜前世死局立标</b>斜切与横向宽幅结合，画面证据和主观判断并行，快速建立被构陷的核心冲突。</figcaption></figure>
+        <figure class="shot"><img loading="lazy" decoding="async" src="重生修仙_AI漫画生成全流程与效果说明_assets/003.jpg" alt="第一话P08重生确认场景"><figcaption><b>P08｜重生状态确认</b>左右并置让七盏灯、药匣与人物反应同页完成“一字不差—还有七日—重生”三步确认。</figcaption></figure>
+        <figure class="shot tall"><img loading="lazy" decoding="async" src="重生修仙_AI漫画生成全流程与效果说明_assets/004.jpg" alt="第一话P15话尾钩子"><figcaption><b>P15｜话尾悬停</b>极近景与暗处等待形成上下压迫，准确文字负责倒计时，画面负责危险临近。</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section id="qa"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">08 / QUALITY CONTROL</div><h2>验收聚焦六项<br>生产可落地指标</h2></div><p class="section-intro">生图前解决结构与依赖问题，生图后只判断实际图是否能承担生产任务。装饰数量和轻微风格偏差不自动触发重生。</p></div>
+      <table>
+        <thead><tr><th>验收维度</th><th>必须回答的问题</th><th>不通过时</th></tr></thead>
+        <tbody>
+          <tr><td>剧情节点</td><td>关键行动、结果、因果和话尾钩子是否完整落地？</td><td><span class="tag danger">回G1 / G5</span></td></tr>
+          <tr><td>人物</td><td>身份、造型、动作归属与active视觉版本是否一致？</td><td><span class="tag review">回G6 / G8</span></td></tr>
+          <tr><td>关键文字</td><td>准确文字是否可读、无姓名前缀、无生产编号、无语义漂移？</td><td><span class="tag danger">回G4 / G7</span></td></tr>
+          <tr><td>页面顺序</td><td>封面与P01–P15是否齐全、唯一、顺序正确？</td><td><span class="tag danger">回G7 / G9</span></td></tr>
+          <tr><td>视觉效果</td><td>画风、光效、氛围、文字层级与移动端可读性是否成立？</td><td><span class="tag review">回G6 / G8</span></td></tr>
+          <tr><td>分镜设计</td><td>二维拓扑、阅读路径、信息层级和页尾推进是否真正落地？</td><td><span class="tag danger">回G5</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>预检铁律：</strong>G7只有在16份提示词齐全、所有依赖哈希一致、生产ID隔离、文字零漂移、两套验证器通过后，才会把 image_generation_allowed 设为 true。</div>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">09 / REWORK ROUTING</div><h2>问题出现在哪里，就回到哪里</h2></div><p class="section-intro">返工采用“最小失效范围”。例如只改一页提示词，不应使未受影响的G1剧情和G4文字失效；但如果新增剧情事实，则必须回到上游刷新来源锁。</p></div>
+      <div class="returns">
+        <div class="return"><b>G1</b><p>剧情、冲突、选择、情绪、钩子，或需要新增文字叙事点。</p></div>
+        <div class="return"><b>G2–3</b><p>事实、因果、知识、伏笔、规则或人物状态发生改变。</p></div>
+        <div class="return"><b>G4</b><p>现有文字的口吻、句长、准确性、力度或拆分方式。</p></div>
+        <div class="return"><b>G5</b><p>页码、画格、镜头、二维拓扑、阅读路径或文字挂载。</p></div>
+        <div class="return"><b>G6</b><p>字形、框形、负空间、角色/服装/地点/道具版本。</p></div>
+        <div class="return"><b>G7</b><p>提示词、参考图映射、哈希、生产ID污染或元数据。</p></div>
+        <div class="return"><b>G8</b><p>单页技术失败或成图的非技术视觉偏差。</p></div>
+        <div class="return"><b>G9</b><p>文件不齐、连续性断裂、PDF验证失败或无法发布。</p></div>
+      </div>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">10 / BOUNDARIES</div><h2>适用边界与常见误区</h2></div><p class="section-intro">流程追求“内容丰富、视觉华丽、生产可控”，但不通过凑格数、堆特效或虚构细节制造表面完成度。</p></div>
+      <div class="boundaries">
+        <article class="boundary"><h3>这套流程擅长</h3><ul><li>基于已确认正史的连载剧情漫画。</li><li>人物主观判断和情绪压迫较强的独白叙事。</li><li>手机纵向阅读下的二维非对称页面。</li><li>需要跨话角色、服装、道具和封面身份连续的项目。</li><li>需要可恢复、可局部返工、可追踪依赖的团队生产。</li></ul></article>
+        <article class="boundary"><h3>这套流程不会做</h3><ul><li>不会用固定画格数、文字比例或无字页配额反推内容。</li><li>不会把 vertical-scroll 简化成连续单列横条。</li><li>不会在分镜或提示词阶段补写没有正史来源的剧情。</li><li>不会把生产ID、页码、格号或制作备注交给图像模型。</li><li>不会因非技术偏差自动裁切、叠字、修补或重生。</li></ul></article>
+      </div>
+    </div></section>
+
+    <section id="sources"><div class="wrap">
+      <div class="section-head"><div><div class="section-kicker">11 / SOURCE MAP</div><h2>本说明依据</h2></div><p class="section-intro">内容来自项目当前有效的配置、流程契约、第一话权威生产记录和实际成图。历史旧流程只作迁移背景，不作为当前门槛依据。</p></div>
+      <div class="sources">
+        <div class="source"><b>项目 profile</b><span>页序列、比例、引擎、交付物与契约入口。</span></div>
+        <div class="source"><b>项目与事实源契约</b><span>唯一正史、权威文件、禁用旧规则与回写边界。</span></div>
+        <div class="source"><b>连载剧情漫画制作流程</b><span>G0–G9权威主链、回流与发布职责。</span></div>
+        <div class="source"><b>阶段门槛</b><span>每个阶段的产物与通用通过条件。</span></div>
+        <div class="source"><b>内容与页面拓扑契约</b><span>内容有效性、叙事桥、二维页面和G5审计。</span></div>
+        <div class="source"><b>可见文字锁</b><span>文字类型、画文关系、准确文字与知识边界。</span></div>
+        <div class="source"><b>长竖版分镜独白风</b><span>P01–P15、非对称拓扑、阅读路径和文字挂载。</span></div>
+        <div class="source"><b>漫画生图提示词编译器</b><span>逐图提示词、参考资产、哈希与生产ID隔离。</span></div>
+        <div class="source"><b>视觉指南与生产连续性</b><span>高清商业国漫仙侠风与active角色版本。</span></div>
+        <div class="source"><b>第一话 production-manifest</b><span>G0–G9实际门槛数据、产物哈希和发布状态。</span></div>
+        <div class="source"><b>第一话 generation-report</b><span>16张成图逐页状态、尺寸与非阻塞备注。</span></div>
+        <div class="source"><b>第一话实际成图</b><span>封面、P01、P08与P15视觉效果样例。</span></div>
+      </div>
+    </div></section>
+  </main>
+
+  <footer><div class="wrap foot"><div><strong>重生修仙：我为大圣寻心魂</strong><br>AI漫画生成全流程 · 使用及效果说明</div><div>HTML单文件交付 · 2026-08-14</div></div></footer>
+  <script>
+    document.querySelectorAll('.copy').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var text=btn.closest('.prompt').querySelector('pre').innerText;
+        navigator.clipboard.writeText(text).then(function(){btn.textContent='已复制';btn.classList.add('done');setTimeout(function(){btn.textContent='复制';btn.classList.remove('done')},1500)}).catch(function(){
+          var range=document.createRange();range.selectNodeContents(btn.closest('.prompt').querySelector('pre'));var sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);btn.textContent='已选中';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

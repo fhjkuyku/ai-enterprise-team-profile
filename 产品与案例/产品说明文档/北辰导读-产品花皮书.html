@@ -1,3 +1,683 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3dbd6e0d3c274abaf1428f4c44daca467dadc08f64d2db603d6a215f9c2042e6
-size 3917669
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北辰导读｜产品花皮书</title>
+<style>
+:root {
+  --paper: #fbf8f1;
+  --surface: #fffdf9;
+  --ink: #18231f;
+  --text: #34423c;
+  --muted: #78827d;
+  --green: #315f49;
+  --green-2: #4f7f61;
+  --green-soft: #eaf2e9;
+  --gold: #c99a49;
+  --gold-soft: #f8edd7;
+  --line: #dfddd4;
+  --warn: #9b5a32;
+  --shadow: 0 12px 36px rgba(30, 50, 42, .11);
+}
+* { box-sizing: border-box; }
+@page { size: A4 landscape; margin: 0; }
+html, body { margin: 0; padding: 0; background: #d8d5cf; }
+body {
+  color: var(--text);
+  font-family: "Microsoft YaHei", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
+  font-size: 10.4pt;
+  line-height: 1.62;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.page {
+  position: relative;
+  width: 297mm;
+  height: 210mm;
+  padding: 13mm 16mm 12mm;
+  overflow: hidden;
+  page-break-after: always;
+  background:
+    radial-gradient(circle at 88% 5%, rgba(201,154,73,.10), transparent 24%),
+    linear-gradient(135deg, #fffdf8 0%, var(--paper) 68%, #f5f0e7 100%);
+}
+.page:last-child { page-break-after: auto; }
+.page::before {
+  content: "";
+  position: absolute;
+  left: 7mm;
+  top: 13mm;
+  bottom: 13mm;
+  width: 1px;
+  background: linear-gradient(var(--gold), rgba(201,154,73,.08));
+}
+.topline, .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topline { height: 12mm; margin-bottom: 5mm; }
+.brand { display: flex; align-items: center; gap: 3mm; color: var(--ink); font-weight: 800; letter-spacing: .02em; }
+.brand svg { width: 9mm; height: 9mm; }
+.eyebrow { color: var(--green); font-size: 8.7pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.series { display: inline-flex; align-items: center; gap: 2mm; color: var(--muted); font-size: 8.5pt; }
+.series .dot { width: 2mm; height: 2mm; border-radius: 99px; background: var(--gold); }
+h1, h2, h3, p { margin: 0; }
+h1, h2 { color: var(--ink); font-family: "Noto Serif SC", "Songti SC", "SimSun", serif; }
+h1 { font-size: 31pt; line-height: 1.17; letter-spacing: -.025em; }
+h2 { font-size: 23pt; line-height: 1.23; letter-spacing: -.015em; }
+h3 { color: var(--ink); font-size: 12pt; line-height: 1.35; }
+.lead { margin-top: 5mm; color: var(--text); font-size: 12.5pt; line-height: 1.72; }
+.muted { color: var(--muted); }
+.accent { color: var(--green); }
+.gold { color: var(--gold); }
+.hero {
+  display: grid;
+  grid-template-columns: .76fr 1.24fr;
+  gap: 12mm;
+  height: 159mm;
+}
+.hero-copy { padding: 5mm 0 0 2mm; display: flex; flex-direction: column; }
+.hero-kicker {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 5mm;
+  padding: 1.6mm 3.2mm;
+  border: 1px solid rgba(49,95,73,.22);
+  border-radius: 99px;
+  color: var(--green);
+  background: rgba(234,242,233,.62);
+  font-size: 9pt;
+  font-weight: 700;
+}
+.pain {
+  margin-top: 7mm;
+  padding-left: 4mm;
+  border-left: 1.2mm solid var(--gold);
+  color: #59645f;
+  font-size: 10.2pt;
+}
+.mental-flow { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; }
+.flow-item { position: relative; padding-top: 7mm; color: var(--ink); font-size: 8.8pt; font-weight: 700; }
+.flow-item::before {
+  content: attr(data-step);
+  position: absolute; top: 0; left: 0;
+  display: grid; place-items: center;
+  width: 5mm; height: 5mm; border-radius: 99px;
+  color: white; background: var(--gold); font-size: 7.4pt;
+}
+.flow-item:not(:last-child)::after {
+  content: ""; position: absolute; top: 2.4mm; left: 7mm; right: 1mm; height: 1px;
+  background: linear-gradient(90deg, var(--gold), rgba(201,154,73,.14));
+}
+.hero-shot-wrap {
+  position: relative;
+  height: 157mm;
+  border: 1px solid rgba(49,95,73,.18);
+  border-radius: 7mm;
+  overflow: hidden;
+  background: #f3f0e8;
+  box-shadow: var(--shadow);
+}
+.hero-shot-wrap::after {
+  content: "界面体验示意";
+  position: absolute; right: 4mm; bottom: 4mm;
+  padding: 1.2mm 2.4mm; border-radius: 99px;
+  color: #6d746f; background: rgba(255,253,249,.9); border: 1px solid var(--line);
+  font-size: 7.5pt;
+}
+.hero-shot { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.footer {
+  position: absolute;
+  left: 16mm; right: 16mm; bottom: 5.5mm;
+  color: #8a918d; font-size: 7.6pt;
+}
+.footer > span:first-child { max-width: 242mm; }
+.page-no { position: absolute; right: 5mm; color: var(--green); font-weight: 800; letter-spacing: .08em; }
+.section-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 10mm; margin: 2mm 0 6mm 2mm; }
+.section-head p { max-width: 98mm; color: var(--muted); font-size: 9.5pt; }
+.workflow {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  gap: 9mm;
+  height: 143mm;
+}
+.workflow-left { display: flex; flex-direction: column; gap: 4mm; }
+.selection-crop {
+  position: relative;
+  height: 43mm;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5mm;
+  background: #ececec;
+  box-shadow: 0 8px 24px rgba(24,35,31,.08);
+}
+.selection-crop img {
+  position: absolute;
+  width: 145%;
+  left: -11mm;
+  top: -18mm;
+}
+.selection-crop .caption {
+  position: absolute; left: 3mm; bottom: 3mm;
+  padding: 1mm 2.4mm; border-radius: 99px;
+  background: rgba(255,253,249,.94); color: var(--green); border: 1px solid rgba(49,95,73,.22);
+  font-size: 7.8pt; font-weight: 700;
+}
+.steps { display: grid; gap: 2.7mm; }
+.step { display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; align-items: start; }
+.step-num {
+  display: grid; place-items: center; width: 8mm; height: 8mm;
+  border-radius: 99px; background: var(--gold-soft); color: var(--warn);
+  font-size: 9pt; font-weight: 800; border: 1px solid rgba(201,154,73,.38);
+}
+.step p { margin-top: .8mm; color: #626c67; font-size: 8.9pt; line-height: 1.5; }
+.workflow-right { display: flex; flex-direction: column; gap: 4mm; }
+.workflow-shot {
+  position: relative;
+  height: 112mm;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5mm;
+  background: white;
+  box-shadow: var(--shadow);
+}
+.workflow-shot img { width: 100%; height: 100%; object-fit: cover; }
+.marker {
+  position: absolute;
+  display: grid; place-items: center;
+  width: 8mm; height: 8mm; border-radius: 99px;
+  color: white; background: var(--gold); border: 1mm solid rgba(255,255,255,.9);
+  box-shadow: 0 2px 9px rgba(82,55,18,.28);
+  font-size: 9pt; font-weight: 900;
+}
+.m1 { left: 27%; top: 18%; }
+.m2 { left: 72%; top: 10%; }
+.m3 { left: 76%; top: 37%; }
+.m4 { left: 74%; top: 87%; }
+.principle {
+  display: flex; align-items: center; gap: 4mm;
+  min-height: 22mm; padding: 3.5mm 5mm;
+  border-left: 1.2mm solid var(--green); border-radius: 0 4mm 4mm 0;
+  background: rgba(234,242,233,.72);
+}
+.principle strong { color: var(--ink); }
+.principle span { color: #66716b; font-size: 8.8pt; }
+.connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; height: 102mm; }
+.route {
+  position: relative;
+  padding: 6mm;
+  border: 1px solid var(--line);
+  border-radius: 6mm;
+  background: rgba(255,253,249,.86);
+  box-shadow: 0 8px 26px rgba(24,35,31,.07);
+}
+.route.primary { border-color: rgba(49,95,73,.28); }
+.route-tag {
+  display: inline-flex; align-items: center; gap: 2mm;
+  padding: 1.2mm 2.6mm; border-radius: 99px;
+  background: var(--green-soft); color: var(--green); font-size: 7.8pt; font-weight: 800;
+}
+.route.secondary .route-tag { background: var(--gold-soft); color: var(--warn); }
+.route h3 { margin-top: 3mm; font-size: 14pt; }
+.route-desc { margin-top: 2mm; color: #68726d; font-size: 8.8pt; }
+.route-path { display: grid; grid-template-columns: 1fr 7mm 1fr 7mm 1fr; align-items: center; gap: 1.5mm; margin-top: 5mm; }
+.route-node {
+  min-height: 24mm; padding: 3mm 2.6mm;
+  border-radius: 3mm; border: 1px solid var(--line); background: white;
+  color: var(--ink); font-size: 8.4pt; font-weight: 700;
+}
+.route-node small { display: block; margin-top: 1mm; color: var(--muted); font-size: 7.2pt; font-weight: 400; line-height: 1.4; }
+.arrow { text-align: center; color: var(--gold); font-size: 15pt; }
+.mini-status {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 4mm; padding: 2.4mm 3mm; border-radius: 3mm;
+  background: #f7faf6; border: 1px solid #dce8da; color: #53635a; font-size: 8pt;
+}
+.status-left { display: flex; align-items: center; gap: 2mm; }
+.status-dot { width: 2.5mm; height: 2.5mm; border-radius: 99px; background: #4f8a5f; box-shadow: 0 0 0 1.5mm rgba(79,138,95,.12); }
+.safe-strip {
+  display: grid; grid-template-columns: 40mm 1fr 1fr 1fr; gap: 4mm; align-items: center;
+  margin-top: 6mm; padding: 4mm 5mm; border-radius: 5mm;
+  color: white; background: var(--green);
+}
+.safe-strip h3 { color: white; font-size: 11pt; }
+.signal { display: flex; align-items: center; gap: 2.5mm; font-size: 8.8pt; }
+.check { display: grid; place-items: center; width: 5.5mm; height: 5.5mm; border-radius: 99px; background: rgba(255,255,255,.16); font-weight: 900; }
+.boundary-row { display: grid; grid-template-columns: 1.15fr .85fr; gap: 7mm; margin-top: 5mm; }
+.boundary, .sources {
+  padding: 3.5mm 4mm; border-top: 1px solid var(--line); color: #68716d; font-size: 7.8pt; line-height: 1.5;
+}
+.boundary strong, .sources strong { color: var(--ink); }
+.source-line { display: block; margin-top: 1mm; }
+
+/* 花皮书默认版式：A4 竖版。宽截图通过裁切和纵向叙事适配。 */
+@page { size: A4 portrait; margin: 0; }
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 12mm 14mm 11mm;
+}
+.page::before { left: 6mm; top: 12mm; bottom: 12mm; }
+.topline { height: 10mm; margin-bottom: 4mm; }
+.brand svg { width: 8mm; height: 8mm; }
+.footer { left: 14mm; right: 14mm; bottom: 4.5mm; }
+.footer > span:first-child { max-width: 156mm; }
+.page-no { right: 3mm; }
+.page-two .page-no { right: 15mm; }
+h1 { font-size: 25pt; line-height: 1.14; }
+h2 { font-size: 20pt; }
+
+/* 第 1 页：先建立心智模型，再给完整界面。 */
+.hero {
+  grid-template-columns: 1fr;
+  grid-template-rows: 97mm 142mm;
+  gap: 7mm;
+  height: 246mm;
+}
+.hero-copy {
+  display: grid;
+  grid-template-columns: 1.03fr .97fr;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 8mm;
+  padding: 2mm 0 0 1mm;
+}
+.hero-kicker { grid-column: 1; grid-row: 1; margin-bottom: 3mm; }
+.hero-copy h1 { grid-column: 1; grid-row: 2; }
+.hero-copy .lead {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: start;
+  margin-top: 10mm;
+  font-size: 10.5pt;
+  line-height: 1.68;
+}
+.hero-copy .pain {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  margin-top: 0;
+  padding-left: 3mm;
+  font-size: 8.5pt;
+  line-height: 1.52;
+}
+.mental-flow {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: 3mm;
+}
+.hero-shot-wrap { height: 142mm; border-radius: 6mm; }
+.hero-shot { object-fit: contain; object-position: center top; }
+
+/* 第 2 页：宽工作流图在上，局部入口与四步说明在下。 */
+.section-head {
+  display: block;
+  margin: 1mm 0 5mm 1mm;
+  min-height: 27mm;
+}
+.section-head p { margin-top: 3mm; max-width: none; font-size: 9pt; }
+.workflow {
+  grid-template-columns: 1fr;
+  grid-template-rows: 119mm 94mm;
+  gap: 5mm;
+  height: 218mm;
+}
+.workflow-right {
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 99mm 17mm;
+  gap: 3mm;
+}
+.workflow-shot { height: 99mm; }
+.principle { min-height: 17mm; padding: 2.5mm 4mm; }
+.principle strong { font-size: 9.2pt; }
+.principle span { font-size: 7.9pt; line-height: 1.4; }
+.workflow-left {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 60mm 1fr;
+  gap: 5mm;
+}
+.selection-crop { height: 48mm; align-self: start; }
+.selection-demo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 13mm 5mm 5mm;
+  background: linear-gradient(145deg, #f6f7f4, #e9eeea);
+}
+.demo-toolbar {
+  position: absolute;
+  top: 5mm;
+  left: 6mm;
+  right: 6mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2mm;
+  padding: 2mm 2.5mm;
+  border: 1px solid rgba(49,95,73,.18);
+  border-radius: 99px;
+  background: rgba(255,253,249,.96);
+  box-shadow: 0 5px 14px rgba(24,35,31,.10);
+  color: var(--green);
+  font-size: 7.5pt;
+  font-weight: 750;
+}
+.demo-toolbar span + span::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 2.8mm;
+  margin-right: 2mm;
+  vertical-align: middle;
+  background: rgba(49,95,73,.18);
+}
+.demo-copy {
+  color: #3f4844;
+  font-size: 9pt;
+  font-weight: 650;
+  line-height: 1.9;
+}
+.demo-copy mark {
+  padding: .6mm 1mm;
+  border-radius: 1mm;
+  background: #d9e5ff;
+  color: #263a58;
+}
+.selection-demo .caption { font-size: 7.3pt; }
+.page-two-heading-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 181mm;
+  height: 10mm;
+  margin-bottom: 4mm;
+}
+.page-two .section-head { margin-top: 0; }
+.page-two .workflow-shot img { object-position: center 42%; }
+.page-two .m1 { left: 33%; top: 42%; }
+.page-two .m2 { left: 66%; top: 9%; }
+.page-two .m3 { left: 73%; top: 35%; }
+.page-two .m4 { left: 83%; top: 88%; }
+.steps {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4mm 3.5mm;
+}
+.step { grid-template-columns: 7mm 1fr; gap: 2mm; }
+.step-num { width: 6.5mm; height: 6.5mm; font-size: 8pt; }
+.step h3 { font-size: 9.5pt; }
+.step p { font-size: 7.6pt; line-height: 1.45; }
+
+/* 第 3 页：两条连接路径纵向排列。 */
+.connect-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: 77mm 77mm;
+  gap: 6mm;
+  height: 160mm;
+}
+.route { padding: 4.5mm 5mm; border-radius: 5mm; }
+.route h3 { margin-top: 2mm; font-size: 12.8pt; }
+.route-desc { margin-top: 1mm; font-size: 8.1pt; line-height: 1.42; }
+.route-path { margin-top: 3mm; }
+.route-node { min-height: 20mm; padding: 2.4mm; font-size: 7.8pt; }
+.route-node small { font-size: 6.9pt; }
+.mini-status { margin-top: 3mm; padding: 1.8mm 2.5mm; }
+.safe-strip {
+  grid-template-columns: 35mm 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 5mm;
+  min-height: 22mm;
+  padding: 3mm 4mm;
+}
+.safe-strip h3 { grid-row: 1 / 3; align-self: center; }
+.signal { font-size: 7.8pt; }
+.signal:last-child { grid-column: 2 / 4; }
+.boundary-row { gap: 5mm; margin-top: 4mm; }
+.boundary, .sources { padding: 3mm 2.5mm; font-size: 7.2pt; }
+</style>
+</head>
+<body>
+  <style id="team-return-style">
+    .team-return-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 15px;
+      color: #fff !important;
+      background: rgba(11, 13, 17, .96);
+      border: 1px solid rgba(255, 255, 255, .58);
+      outline: 4px solid rgba(11, 13, 17, .78);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .24);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 800;
+      text-decoration: none !important;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .team-return-button:hover {
+      color: #fff !important;
+      background: #155eef;
+      border-color: #8eb2ff;
+      transform: translateY(-1px);
+    }
+    .team-return-button:focus-visible {
+      outline: 4px solid rgba(21, 94, 239, .32);
+      outline-offset: 3px;
+    }
+    @media (max-width: 560px) {
+      .team-return-button { top: 12px; left: 12px; min-height: 38px; padding: 0 12px; font-size: 12px; }
+    }
+    @media print {
+      .team-return-button { display: none !important; }
+    }
+  </style>
+  <a class="team-return-button" href="../../AI企业落地团队介绍.html?product=reader#product-gallery" aria-label="返回AI企业落地团队介绍">← 返回团队介绍</a>
+  <script id="team-return-script">
+    (function () {
+      const button = document.querySelector(".team-return-button");
+      if (!button) return;
+      button.addEventListener("click", function (event) {
+        const params = new URLSearchParams(location.search);
+        const returnTarget = params.get("return");
+        if (!returnTarget) {
+          if (params.get("from") === "team" && history.length > 1) {
+            event.preventDefault();
+            history.back();
+          }
+          return;
+        }
+        try {
+          const returnUrl = new URL(returnTarget, location.href);
+          if (!["http:", "https:", "file:"].includes(returnUrl.protocol)) return;
+          event.preventDefault();
+          location.href = returnUrl.href;
+        } catch (error) {
+          // Invalid return targets fall back to this product's carousel entry.
+        }
+      });
+    })();
+  </script>
+
+<section class="page page-one">
+  <div class="topline">
+    <div class="brand">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <circle cx="14" cy="14" r="12.2" fill="#F8FBF6" stroke="#4C7F5D" stroke-width="1.9"/>
+        <path d="M14 4.2 L16.7 13.3 L14 23.8 L11.3 13.3 Z" fill="#2F5C40"/>
+        <path d="M4.2 14 L13.3 11.3 L23.8 14 L13.3 16.7 Z" fill="#4C7F5D" opacity=".34"/>
+        <circle cx="14" cy="14" r="1.55" fill="#FFFDF9"/>
+      </svg>
+      <span>北辰导读</span>
+    </div>
+    <div class="series"><span class="dot"></span><span>白云AI · 产品花皮书 01</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="hero-kicker">沉浸式 AI 阅读工作区</div>
+      <h1>把网页阅读<br>变成一条<br><span class="accent">可以追问的线</span></h1>
+      <p class="lead">选中一句话，马上翻译、摘要、解释或追问。回答留在原文旁边，切换标签页也不必重新开始。</p>
+      <p class="pain">长文阅读最容易断在“复制原文 → 切聊天窗口 → 补背景 → 再回来找位置”。北辰导读把这段断裂重新接回网页。</p>
+      <div class="mental-flow" aria-label="产品心智模型">
+        <div class="flow-item" data-step="1">选中句子</div>
+        <div class="flow-item" data-step="2">选择动作</div>
+        <div class="flow-item" data-step="3">读懂主线</div>
+        <div class="flow-item" data-step="4">继续追问</div>
+      </div>
+    </div>
+
+    <div class="hero-shot-wrap">
+      <img loading="eager" decoding="async" fetchpriority="high" class="hero-shot" src="北辰导读-产品花皮书_assets/001.png" alt="北辰导读沉浸式侧栏完整界面示意">
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>产品判断：AI 不必成为另一个目的地，它可以成为阅读过程中的同行者。</span>
+    <span class="page-no">01 / 03</span>
+  </div>
+</section>
+
+<section class="page page-two">
+  <div class="section-head">
+    <div class="page-two-heading-top">
+      <div class="brand">
+        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12.2" fill="#F8FBF6" stroke="#4C7F5D" stroke-width="1.9"/><path d="M14 4.2 L16.7 13.3 L14 23.8 L11.3 13.3 Z" fill="#2F5C40"/><circle cx="14" cy="14" r="1.55" fill="#FFFDF9"/></svg>
+        <span>北辰导读</span>
+      </div>
+      <div class="eyebrow">Workflow / 从原文到理解</div>
+    </div>
+    <h2>一段文字，<span class="accent">四步走完</span>阅读闭环</h2>
+    <p>动作足够短，才能让 AI 帮忙而不抢走阅读本身。第一次体验时，只需要从“解释”开始。</p>
+  </div>
+
+  <div class="workflow">
+    <div class="workflow-left">
+      <div class="selection-crop selection-demo" role="img" aria-label="网页划选后出现对话、翻译和摘要动作的示意图">
+        <div class="demo-toolbar"><span>对话</span><span>翻译</span><span>摘要</span></div>
+        <div class="demo-copy">反馈让模型在交互中不断<br><mark>修正自己的判断。</mark></div>
+        <div class="caption">划选动作示意</div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div><h3>选中真正卡住你的句子</h3><p>不必复制，也不必先想好一整段提示词。</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div><h3>选择一个阅读动作</h3><p>翻译看意思，摘要抓主线，解释看逻辑，追问验证理解。</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div><h3>先看判断、依据和下一步</h3><p>结构化卡片帮你快速定位，而不是先塞来一整屏答案。</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div><h3>沿着原文继续追问</h3><p>换标签查资料时，会话、选区、草稿和生成进度继续保持。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow-right">
+      <div class="workflow-shot">
+        <img loading="lazy" decoding="async" src="北辰导读-产品花皮书_assets/002.png" alt="网页选区、连接线与北辰导读侧栏工作流">
+        <span class="marker m1">1</span>
+        <span class="marker m2">2</span>
+        <span class="marker m3">3</span>
+        <span class="marker m4">4</span>
+      </div>
+      <div class="principle">
+        <strong>为什么它不像普通聊天框？</strong>
+        <span>选区、回答和追问沿同一条时间线组织；当前活动标签显示侧栏，后台标签不会同时挤压页面。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>界面说明：全貌图用于建立心智模型；本页控件位置来自冻结视觉基线。</span>
+    <span class="page-no">02 / 03</span>
+  </div>
+</section>
+
+<section class="page page-three">
+  <div class="topline">
+    <div class="brand">
+      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12.2" fill="#F8FBF6" stroke="#4C7F5D" stroke-width="1.9"/><path d="M14 4.2 L16.7 13.3 L14 23.8 L11.3 13.3 Z" fill="#2F5C40"/><circle cx="14" cy="14" r="1.55" fill="#FFFDF9"/></svg>
+      <span>北辰导读</span>
+    </div>
+    <div class="eyebrow">Connect / 连接与验收</div>
+  </div>
+
+  <div class="section-head">
+    <h2>选一种连接方式，<span class="accent">看到三个信号</span>就算成功</h2>
+    <p>北辰导读只做阅读工作区和连接壳；模型能力来自你选择的中转服务或本地工具。</p>
+  </div>
+
+  <div class="connect-grid">
+    <article class="route primary">
+      <div class="route-tag">路径 A · 更短</div>
+      <h3>中转 API</h3>
+      <p class="route-desc">扩展后台直接连接服务，不需要 Bridge。适合希望装好就用、并已有服务密钥的人。</p>
+      <div class="route-path">
+        <div class="route-node">选择默认实例<small>升级后仍会自动出现</small></div>
+        <div class="arrow">›</div>
+        <div class="route-node">关联本机凭据<small>只选择，不在手册里展示密钥</small></div>
+        <div class="arrow">›</div>
+        <div class="route-node">点击测试<small>通过后即可回网页使用</small></div>
+      </div>
+      <div class="mini-status">
+        <div class="status-left"><span class="status-dot"></span><strong>Rightcode-gemini</strong><span>· 后台直连</span></div>
+        <span>测试成功</span>
+      </div>
+    </article>
+
+    <article class="route secondary">
+      <div class="route-tag">路径 B · 复用现有工具</div>
+      <h3>本地 Claude / Codex / OpenCode</h3>
+      <p class="route-desc">继续使用本机已有的 CLI 或 OpenCode harness。只有这条路径需要保持 Bridge 连接。</p>
+      <div class="route-path">
+        <div class="route-node">启动本地连接<small>保持连接窗口运行</small></div>
+        <div class="arrow">›</div>
+        <div class="route-node">选择检测到的工具<small>不改原有 harness 路径</small></div>
+        <div class="arrow">›</div>
+        <div class="route-node">回网页提问<small>错误会在侧栏明确显示</small></div>
+      </div>
+      <div class="mini-status">
+        <div class="status-left"><span class="status-dot"></span><strong>OpenCode</strong><span>· 本地模型</span></div>
+        <span>Bridge 已连接</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="safe-strip">
+    <h3>三个成功信号</h3>
+    <div class="signal"><span class="check">✓</span><span>状态点变绿</span></div>
+    <div class="signal"><span class="check">✓</span><span>测试连接通过</span></div>
+    <div class="signal"><span class="check">✓</span><span>真实选区能返回并继续追问</span></div>
+  </div>
+
+  <div class="boundary-row">
+    <div class="boundary"><strong>使用边界：</strong>普通网页可用；浏览器设置页、扩展商店等保护页面不可注入。关闭发起生成的标签会停止当前任务。更新时优先覆盖并重新加载，不要随意卸载。</div>
+    <div class="sources"><strong>资料来源：</strong><span class="source-line">产品安装与运行指南 · 沉浸式前端设计规格 · 生产化回归记录 · 产品界面示意与冻结视觉基线</span></div>
+  </div>
+
+  <div class="footer">
+    <span>安全提示：密钥只用遮罩或占位说明；本书不包含真实密钥、本地路径或客户数据。</span>
+    <span class="page-no">03 / 03</span>
+  </div>
+</section>
+
+</body>
+</html>
